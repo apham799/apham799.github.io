@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Granular I/O — Alan Pham</title>
+  <meta name="description" content="Enabling bi-directional malleable interaction for actuated TUIs with magnetic particles." />
+  <meta name="theme-color" content="#0f0f0e" />
+  <meta property="og:title" content="Granular I/O — Alan Pham" />
+  <meta property="og:description" content="Enabling bi-directional malleable interaction for actuated TUIs with magnetic particles." />
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+      document.documentElement.classList.add("js");
+      // Page transition ("buoyant lift"): if we arrived via an internal link, start the rise-in animation.
+      try {
+        var pt = Number(sessionStorage.getItem("pt") || 0);
+        sessionStorage.removeItem("pt");
+        if (pt && Date.now() - pt < 4000 && !matchMedia("(prefers-reduced-motion: reduce)").matches)
+          document.documentElement.classList.add("pt-enter");
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body class="pp" data-project="granular-io">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="site-header__name" href="../../index.html">Alan Pham</a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#publications">Publications</a>
+      <a href="../../index.html#news">News</a>
+      <a href="../../index.html#about">About</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="pp-hero" id="top">
+      <div class="pp-hero__media">
+        <video muted loop playsinline autoplay preload="auto" poster="../../assets/media/granular-io.jpg" data-autoplay
+               aria-label="Fingers press and reshape a cluster of red and blue magnetic particles on a white surface.">
+          <source src="../../assets/media/granular-io.mp4" type="video/mp4" />
+        </video>
+        <button class="media-toggle mono" type="button" aria-label="Pause background video">Pause</button>
+      </div>
+      <div class="pp-hero__body">
+        <a class="pp-back mono" href="../../index.html#granular-io">&larr; All research</a>
+        <p class="pp-hero__venue mono">UIST &rsquo;26 &middot; Full Paper</p>
+        <h1 class="pp-hero__title">Granular I/O</h1>
+        <p class="pp-hero__sub">Enabling bi-directional malleable interaction for actuated TUIs with magnetic particles.</p>
+      </div>
+    </section>
+
+    <!-- ============ META STRIP ============ -->
+    <section class="pp-meta" aria-label="Project details">
+      <div>
+        <h2 class="mono">Venue</h2>
+        <p>ACM UIST &rsquo;26 &middot; Paper talk &amp; demo</p>
+      </div>
+      <div>
+        <h2 class="mono">Authors</h2>
+        <p>Chi Wang, Clara Cui, <strong>Alan Pham</strong>, Justice T Andersen, Tucker Rae-Grant, Ken Nakagaki</p>
+      </div>
+      <div>
+        <h2 class="mono">Links</h2>
+        <ul class="pp-meta__links">
+          <li><a href="https://doi.org/10.1145/3830398.3830589" target="_blank" rel="noopener">ACM DL&nbsp;↗</a></li>
+          <li><a href="https://www.youtube.com/watch?v=jblO1pQyjmk" target="_blank" rel="noopener">YouTube&nbsp;↗</a></li>
+          <li><a href="https://www.axlab.cs.uchicago.edu/projects/granular-io" target="_blank" rel="noopener">Lab page&nbsp;↗</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">Abstract</h2>
+      <div class="pp-section__body">
+        <p class="pp-abstract reveal">
+          Granular materials &mdash; clusters of small discrete particles &mdash; afford a uniquely malleable form of physical interaction, enabling intuitive shaping, splitting, and merging through natural hand gestures. Despite their rich interaction potential, granular materials remain largely unexplored as a form factor for actuated, bi-directional Tangible User Interfaces (TUIs). We present Granular I/O, an approach that employs millimeter-scale passive magnetic particle clusters, actuated by external magnetic field controllers, to enable malleable input and output interactions for granular-based actuated TUIs. We describe a comprehensive design space for malleable granular interaction, alongside a full hardware and software implementation covering particle cluster fabrication, two actuation platforms, and authoring software. We further report technical characterization and evaluation to validate the system, and demonstrate a range of applications that harness malleable I/O for interactive use.
+        </p>
+        <p class="pp-paper reveal"><a href="../../assets/papers/granular-io-uist26.pdf" target="_blank" rel="noopener">Read the paper (PDF)&nbsp;↗</a></p>
+      </div>
+    </section>
+
+    <figure class="pp-fig pp-fig--wide pp-fig--diagram reveal">
+      <img src="../../assets/media/granular-io/teaser.jpg" width="1280" height="408" loading="lazy" decoding="async"
+           alt="Three panels: red and blue magnetic particles on an actuation platform, a hand touching a stick figure made of light-blue particles, and a hand shaping red particles into a heart above a recreated heart." />
+      <figcaption class="mono">Particles on an actuation platform, a stick figure, and a heart shaped by hand and recreated by the system</figcaption>
+    </figure>
+
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">Interaction</h2>
+      <div class="pp-section__body">
+        <p class="reveal">
+          Physical interaction with Granular I/O involves three parts: the user, magnetic particles joined into granular
+          clusters, and a magnetic field actuator array beneath them. Clusters can be moved, split and merged, transitioned
+          between shapes, deformed, and picked up and placed, and the system can also render haptic properties such as
+          stiffness and vibration.
+        </p>
+      </div>
+    </section>
+
+    <figure class="pp-fig pp-fig--wide pp-fig--diagram reveal">
+      <img src="../../assets/media/granular-io/concept.jpg" width="1522" height="404" loading="lazy" decoding="async"
+           alt="Diagram of a hand above a cluster of magnetic particles resting on a grid of magnetic-field actuators." />
+      <figcaption class="mono">User, magnetic particles, and magnetic-field actuator array</figcaption>
+    </figure>
+
+    <figure class="pp-fig pp-fig--wide pp-fig--diagram reveal">
+      <img src="../../assets/media/granular-io/design-space.jpg" width="1280" height="231" loading="lazy" decoding="async"
+           alt="Illustrations of interaction types: move, split and merge, shape transition, deformation, pick-up and place, and haptic properties." />
+      <figcaption class="mono">Bi-directional malleable interactions and haptic property rendering</figcaption>
+    </figure>
+
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">Implementation</h2>
+      <div class="pp-section__body">
+        <p class="reveal">
+          Particles are 3D-printed shells with small magnets inserted mid-print. Two actuation platforms move them: a
+          7&nbsp;&times;&nbsp;7 array of linear actuated permanent magnets (LAPM) and a 4&nbsp;&times;&nbsp;4 electromagnet (EM)
+          array. A GUI controls the actuators over a live camera view, saves shapes, and previews the tweening frames used
+          for shape transitions.
+        </p>
+      </div>
+    </section>
+
+    <figure class="pp-fig pp-fig--wide pp-fig--diagram reveal">
+      <img src="../../assets/media/granular-io/particles.jpg" width="1280" height="349" loading="lazy" decoding="async"
+           alt="Six kinds of 3D-printed magnetic particles in different sizes and shapes, and magnets being inserted during printing." />
+      <figcaption class="mono">Particle designs and magnet insertion during 3D printing</figcaption>
+    </figure>
+
+    <div class="pp-row">
+      <figure class="pp-fig pp-fig--diagram reveal" style="--ar: 2.083">
+        <img src="../../assets/media/granular-io/hardware.jpg" width="1177" height="565" loading="lazy" decoding="async"
+             alt="Exploded view of a linear actuated permanent magnet module next to the 7 by 7 LAPM array and the 4 by 4 electromagnet array." />
+        <figcaption class="mono">LAPM module and the two actuator arrays</figcaption>
+      </figure>
+      <figure class="pp-fig pp-fig--diagram reveal" style="--ar: 1.639">
+        <img src="../../assets/media/granular-io/gui.jpg" width="1280" height="781" loading="lazy" decoding="async"
+             alt="Screenshot of the control software with mode buttons, an actuator grid over a camera view of red particles, parameter controls, and saved shapes." />
+        <figcaption class="mono">Authoring GUI</figcaption>
+      </figure>
+      <figure class="pp-fig pp-fig--diagram reveal" style="--ar: 0.772">
+        <img src="../../assets/media/granular-io/setup.jpg" width="988" height="1280" loading="lazy" decoding="async"
+             alt="The system setup: an overhead camera on a stand above the actuator array with a cluster of particles on top." />
+        <figcaption class="mono">System setup</figcaption>
+      </figure>
+    </div>
+
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">Applications</h2>
+      <div class="pp-section__body">
+        <p class="reveal">
+          Applications include a shape display with motion and haptic properties, a reconfigurable tabletop UI with buttons
+          and sliders, stop-motion messages that record and replay hand-made shapes, prototyping with water-soluble PVA
+          particles that solidify into objects, and a programmable circuit built from conductive particles.
+        </p>
+      </div>
+    </section>
+
+    <figure class="pp-fig pp-fig--wide pp-fig--diagram reveal">
+      <img src="../../assets/media/granular-io/shape-display.jpg" width="1280" height="632" loading="lazy" decoding="async"
+           alt="A beating heart, an animated stick figure, particles with different stiffness and vibration, and particles moving like electrons in a circuit." />
+      <figcaption class="mono">Shape display with dynamic motion and haptic properties</figcaption>
+    </figure>
+
+    <figure class="pp-fig pp-fig--wide pp-fig--diagram reveal">
+      <img src="../../assets/media/granular-io/tabletop-ui.jpg" width="1280" height="348" loading="lazy" decoding="async"
+           alt="Particles forming play and pause buttons, a volume slider, and a key moved toward the user." />
+      <figcaption class="mono">Reconfigurable tabletop UI</figcaption>
+    </figure>
+
+    <div class="pp-row">
+      <figure class="pp-fig pp-fig--diagram reveal" style="--ar: 1.352">
+        <img src="../../assets/media/granular-io/stop-motion.jpg" width="1612" height="1192" loading="lazy" decoding="async"
+             alt="Hands shaping red particles into letters and a heart, the GUI recording them, and the system replaying the shapes." />
+        <figcaption class="mono">Stop-motion messages: shape, record, replay</figcaption>
+      </figure>
+      <figure class="pp-fig pp-fig--diagram reveal" style="--ar: 3.314">
+        <img src="../../assets/media/granular-io/circuit.jpg" width="1077" height="325" loading="lazy" decoding="async"
+             alt="Dark conductive particles bridging copper tape to switch between a red and a green LED." />
+        <figcaption class="mono">Programmable circuit with conductive particles</figcaption>
+      </figure>
+    </div>
+
+    <figure class="pp-fig pp-fig--wide pp-fig--diagram reveal">
+      <img src="../../assets/media/granular-io/prototyping.jpg" width="1280" height="262" loading="lazy" decoding="async"
+           alt="A sequence of a cluster being shaped on the platform, adjusted by hand, sprayed with water, and turned into a solid keychain." />
+      <figcaption class="mono">Prototyping with PVA-based particles</figcaption>
+    </figure>
+
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">Evaluation</h2>
+      <div class="pp-section__body">
+        <p class="reveal">
+          Technical characterization covered the magnetic field of each actuator, how reliably different particle designs
+          and cluster sizes perform each actuation primitive, how many particles split as the magnetic intensity difference
+          increases, and how tweening and shaking affect shape transitions.
+        </p>
+      </div>
+    </section>
+
+    <div class="pp-row">
+      <figure class="pp-fig pp-fig--diagram reveal" style="--ar: 0.705">
+        <img src="../../assets/media/granular-io/transition-results.jpg" width="902" height="1280" loading="lazy" decoding="async"
+             alt="Grid of shape transition results comparing tweening and shaking, shaking only, tweening only, and neither." />
+        <figcaption class="mono">Shape transition results</figcaption>
+      </figure>
+      <figure class="pp-fig pp-fig--diagram reveal" style="--ar: 1.586">
+        <img src="../../assets/media/granular-io/split-results.jpg" width="966" height="609" loading="lazy" decoding="async"
+             alt="Chart of the number of particles split against the difference in magnetic intensity." />
+        <figcaption class="mono">Particles split vs. magnetic intensity difference</figcaption>
+      </figure>
+    </div>
+
+    <!-- ============ VIDEO ============ -->
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">Video</h2>
+      <div class="pp-section__body">
+        <div class="yt reveal" data-yt="jblO1pQyjmk">
+          <button class="yt__play" type="button" aria-label="Play the Granular I/O video">
+            <img src="../../assets/media/granular-io/video-poster.jpg" width="1600" height="900" loading="lazy" decoding="async" alt="" />
+            <span class="yt__icon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CITE ============ -->
+    <section class="pp-section" id="cite">
+      <h2 class="pp-section__label mono reveal">Cite</h2>
+      <div class="pp-section__body">
+        <p class="pp-cite reveal">
+          Chi Wang, Clara Cui, Alan Pham, Justice T Andersen, Tucker Rae-Grant, and Ken Nakagaki. 2026. Granular I/O: Enabling Bi-directional Malleable Interaction for Actuated TUIs with Magnetic Particles. In <em>The 39th Annual ACM Symposium on User Interface Software and Technology (UIST &rsquo;26)</em>, November 02&ndash;05, 2026, Detroit, MI, USA. ACM, New York, NY, USA, 15 pages.
+          <a href="https://doi.org/10.1145/3830398.3830589" target="_blank" rel="noopener">https://doi.org/10.1145/3830398.3830589</a>
+        </p>
+        <!-- TODO(Alan): replace with the BibTeX from ACM's "Export Citation" (adds the article number) -->
+        <div class="bibtex reveal" data-todo="Replace with ACM BibTeX export">
+          <button class="bibtex__copy" type="button" aria-label="Copy BibTeX" title="Copy BibTeX">
+            <svg class="bibtex__icon bibtex__icon--copy" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="8.5" y="8.5" width="11" height="11" rx="2" /><path d="M15.5 8.5V6.5a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h2" /></svg>
+            <svg class="bibtex__icon bibtex__icon--done" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+          </button>
+<pre><code>@inproceedings{10.1145/3830398.3830589,
+author = {Wang, Chi and Cui, Clara and Pham, Alan and Andersen, Justice T and Rae-Grant, Tucker and Nakagaki, Ken},
+title = {Granular I/O: Enabling Bi-directional Malleable Interaction for Actuated TUIs with Magnetic Particles},
+year = {2026},
+isbn = {9798400728563},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3830398.3830589},
+doi = {10.1145/3830398.3830589},
+booktitle = {Proceedings of the 39th Annual ACM Symposium on User Interface Software and Technology},
+numpages = {15},
+keywords = {Actuated Tangible User Interface, Magnetic Actuation},
+location = {Detroit, MI, USA},
+series = {UIST '26}
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="pp-end">
+      <ul class="pills" aria-label="Themes">
+        <li>Materials</li><li>Sensing</li><li>Actuation</li><li>Malleable Interfaces</li>
+      </ul>
+      <a class="pp-next" href="../nodebots/index.html">
+        <span class="mono">Next project</span>
+        <span class="pp-next__title">NodeBots &rarr;</span>
+      </a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="site-footer__big">Get in touch &mdash; <a href="mailto:apham799@uchicago.edu">apham799@uchicago.edu</a></p>
+    <div class="site-footer__row mono">
+      <span>Last updated November 2026</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <button class="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch to light theme">
+    <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="4.2" />
+      <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.55 1.55M17.15 17.15l1.55 1.55M5.3 18.7l1.55-1.55M17.15 6.85l1.55-1.55" />
+    </svg>
+    <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.4 8.4 0 1 0 10.8 10.8Z" />
+    </svg>
+  </button>
+
+  <dialog class="lightbox" aria-label="Enlarged image">
+    <button class="lightbox__close mono" type="button">Close &times;</button>
+    <img alt="" />
+  </dialog>
+
+  <script src="../../assets/js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Buoyancé – Tug(gle) · Ars Electronica 2025 — Alan Pham</title>
+  <meta name="description" content="Buoyancé – Tug(gle): an installation of Buoyancé exhibited at Ars Electronica Festival 2025 in Linz, Austria." />
+  <meta name="theme-color" content="#0f0f0e" />
+  <meta property="og:title" content="Buoyancé – Tug(gle) · Ars Electronica 2025 — Alan Pham" />
+  <meta property="og:description" content="An installation of Buoyancé at Ars Electronica Festival 2025, Linz, Austria." />
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+      document.documentElement.classList.add("js");
+      // Page transition ("buoyant lift"): if we arrived via an internal link, start the rise-in animation.
+      try {
+        var pt = Number(sessionStorage.getItem("pt") || 0);
+        sessionStorage.removeItem("pt");
+        if (pt && Date.now() - pt < 4000 && !matchMedia("(prefers-reduced-motion: reduce)").matches)
+          document.documentElement.classList.add("pt-enter");
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body class="pp" data-project="buoyance-tuggle">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="site-header__name" href="../../index.html">Alan Pham</a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#publications">Publications</a>
+      <a href="../../index.html#news">News</a>
+      <a href="../../index.html#about">About</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="pp-hero" id="top">
+      <div class="pp-hero__media">
+        <video muted loop playsinline autoplay preload="auto" poster="../../assets/media/tuggle/hero.jpg" data-autoplay
+               aria-label="Iridescent balloons drift at different heights through a white gallery room while small robots move on the dark floor below.">
+          <source src="../../assets/media/tuggle/hero.mp4" type="video/mp4" />
+        </video>
+        <button class="media-toggle mono" type="button" aria-label="Pause background video">Pause</button>
+      </div>
+      <div class="pp-hero__body">
+        <a class="pp-back mono" href="../buoyance/index.html">&larr; Buoyancé</a>
+        <p class="pp-hero__venue mono">Exhibition &middot; Ars Electronica Festival 2025</p>
+        <h1 class="pp-hero__title">Buoyancé &ndash; Tug(gle)</h1>
+        <p class="pp-hero__sub">An installation of Buoyancé at Ars Electronica Festival 2025 in Linz, Austria.</p>
+      </div>
+    </section>
+
+    <!-- ============ META STRIP ============ -->
+    <section class="pp-meta pp-meta--4" aria-label="Exhibition details">
+      <div>
+        <h2 class="mono">Venue</h2>
+        <!-- TODO(Alan): add exact dates -->
+        <p>Ars Electronica Festival 2025<br />Linz, Austria &middot; September 2025</p>
+      </div>
+      <div>
+        <h2 class="mono">Team</h2>
+        <p><strong>Alan Pham</strong>, Yuxiao Li, Miyu Fukuoka, Ken Nakagaki</p>
+      </div>
+      <div>
+        <h2 class="mono">Part of</h2>
+        <p>Campus Exhibition &ldquo;Edge Experiences: Entangled Lives of Matter, Technology, and Environment,&rdquo; The University of Chicago</p>
+      </div>
+      <div>
+        <h2 class="mono">Links</h2>
+        <ul class="pp-meta__links">
+          <li><a href="https://ars.electronica.art/panic/en/view/edge-experiences-entangled-lives-of-matter-technology-and-environment-20d38ddb450c8199bf32fa17d7757209/" target="_blank" rel="noopener">Ars Electronica&nbsp;↗</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT THE INSTALLATION ============ -->
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">About</h2>
+      <div class="pp-section__body">
+        <!-- TODO(Alan): describe the installation: what visitors did, how Tug(gle) worked, scale, duration -->
+        <p class="pp-abstract reveal" data-todo="Describe the installation">
+          <em>Buoyancé &ndash; Tug(gle)</em> brought Buoyancé out of the lab and into a public festival setting, where
+          visitors could interact with helium-inflated balloons reeled through the air by mobile robots.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ GALLERY ============
+         Photos: assets/media/tuggle/ (originals in Portfolio/_source-media/Ars Electronica/).
+         TODO(Alan): review captions. -->
+    <figure class="pp-fig pp-fig--wide reveal">
+      <img src="../../assets/media/tuggle/room.jpg" width="2200" height="1467" loading="lazy" decoding="async"
+           alt="A white gallery room filled with iridescent balloons floating at different heights above small robots on the floor." />
+    </figure>
+
+    <div class="pp-pair">
+      <figure class="pp-fig reveal">
+        <img src="../../assets/media/tuggle/doorway.jpg" width="1400" height="933" loading="lazy" decoding="async"
+             alt="View through a yellow doorway into the gallery, where iridescent balloons hover in the room." />
+        <figcaption class="mono">Entering the installation</figcaption>
+      </figure>
+      <figure class="pp-fig reveal">
+        <img src="../../assets/media/tuggle/tether.jpg" width="1400" height="933" loading="lazy" decoding="async"
+             alt="Close view of an iridescent balloon floating above the small robot that tethers it." />
+        <figcaption class="mono">A balloon and its ReelBot</figcaption>
+      </figure>
+    </div>
+
+    <figure class="pp-fig pp-fig--wide reveal">
+      <img src="../../assets/media/tuggle/visitors.jpg" width="2200" height="1467" loading="lazy" decoding="async"
+           alt="A group of visitors stands in the gallery watching the balloons; one visitor points toward them." />
+      <figcaption class="mono">Visitors at Ars Electronica</figcaption>
+    </figure>
+
+    <div class="pp-pair">
+      <figure class="pp-fig reveal">
+        <img src="../../assets/media/tuggle/mother.jpg" width="1400" height="933" loading="lazy" decoding="async"
+             alt="A mother holding her baby looks up at the iridescent balloons floating around them." />
+        <figcaption class="mono">A visitor and her baby</figcaption>
+      </figure>
+      <figure class="pp-fig reveal">
+        <img src="../../assets/media/tuggle/closeup.jpg" width="1400" height="933" loading="lazy" decoding="async"
+             alt="A large iridescent balloon hovering in front of a white door." />
+      </figure>
+    </div>
+
+    <div class="pp-pair">
+      <figure class="pp-fig reveal">
+        <img src="../../assets/media/tuggle/light.jpg" width="1400" height="933" loading="lazy" decoding="async"
+             alt="Visitors in the gallery under colored lighting, with balloons overhead and a laptop on a table." />
+      </figure>
+      <figure class="pp-fig reveal">
+        <img src="../../assets/media/tuggle/team.jpg" width="1400" height="933" loading="lazy" decoding="async"
+             alt="Visitors stand with a member of the team in front of floating balloons and a monitor." />
+      </figure>
+    </div>
+
+    <figure class="pp-fig pp-fig--wide reveal">
+      <img src="../../assets/media/tuggle/robots.jpg" width="1400" height="933" loading="lazy" decoding="async"
+           alt="Balloons clustered in mid-air above a group of ReelBots on the gallery floor." />
+    </figure>
+
+    <!-- ============ REHEARSAL ============ -->
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">Rehearsal</h2>
+      <div class="pp-section__body">
+        <!-- TODO(Alan): add where/when the rehearsal took place and anything that changed for Linz -->
+        <p class="reveal" data-todo="Describe the rehearsal">
+          Before the festival, we staged a rehearsal of the installation to tune the robots, balloons, and lighting.
+        </p>
+      </div>
+    </section>
+
+    <figure class="pp-fig pp-fig--wide reveal">
+      <div class="pp-video">
+        <video muted loop playsinline preload="none" poster="../../assets/media/tuggle/rehearsal.jpg" data-inview
+               aria-label="Iridescent balloons drift in front of a white wall, casting large soft shadows, during the rehearsal.">
+          <source src="../../assets/media/tuggle/rehearsal.mp4" type="video/mp4" />
+        </video>
+        <button class="media-toggle mono" type="button" aria-label="Pause video">Pause</button>
+      </div>
+      <figcaption class="mono">Balloons and their shadows during the rehearsal</figcaption>
+    </figure>
+
+    <div class="pp-pair">
+      <figure class="pp-fig reveal">
+        <img src="../../assets/media/tuggle/rehearsal-shadows.jpg" width="1400" height="933" loading="lazy" decoding="async"
+             alt="A person stands beneath a cluster of iridescent balloons, their shadows spread across the white wall." />
+      </figure>
+      <figure class="pp-fig reveal">
+        <img src="../../assets/media/tuggle/rehearsal-setup.jpg" width="1400" height="933" loading="lazy" decoding="async"
+             alt="A team member bends to adjust a cluster of balloons above the robots on the floor." />
+        <figcaption class="mono">Tuning the balloons</figcaption>
+      </figure>
+    </div>
+
+    <div class="pp-pair">
+      <figure class="pp-fig reveal">
+        <img src="../../assets/media/tuggle/rehearsal-testing.jpg" width="1400" height="933" loading="lazy" decoding="async"
+             alt="Two people test the installation, one guiding a large iridescent balloon toward the other." />
+        <figcaption class="mono">Testing interactions</figcaption>
+      </figure>
+      <figure class="pp-fig reveal">
+        <img src="../../assets/media/tuggle/rehearsal-robots.jpg" width="1400" height="933" loading="lazy" decoding="async"
+             alt="A person walks past robots on the floor while balloons and their shadows fill the wall behind." />
+      </figure>
+    </div>
+
+    <figure class="pp-fig pp-fig--wide reveal">
+      <img src="../../assets/media/tuggle/rehearsal-room.jpg" width="2200" height="1467" loading="lazy" decoding="async"
+           alt="Wide view of the rehearsal space: a workroom with tables and a laptop, balloons floating along the white wall." />
+      <figcaption class="mono">The rehearsal space</figcaption>
+    </figure>
+
+    <!-- ============ RELATED ============ -->
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">Related</h2>
+      <div class="pp-section__body">
+        <ul class="pp-related reveal">
+          <li>
+            <a class="pp-related__item pp-related__item--media" href="../buoyance/index.html">
+              <span class="pp-related__media" aria-hidden="true">
+                <video muted loop playsinline preload="none" poster="../../assets/media/buoyance.jpg" data-inview>
+                  <source src="../../assets/media/buoyance.mp4" type="video/mp4" />
+                </video>
+              </span>
+              <span class="pp-related__type mono">Research</span>
+              <span class="pp-related__main">
+                <span class="pp-related__title">Buoyancé</span>
+                <span class="pp-related__meta">UIST &rsquo;25 &middot; Full Paper</span>
+              </span>
+              <span class="pp-related__arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="pp-end">
+      <ul class="pills" aria-label="Themes">
+        <li>Installation</li><li>Public Engagement</li><li>Actuation</li><li>Spatial Interfaces</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="site-footer__big">Get in touch &mdash; <a href="mailto:apham799@uchicago.edu">apham799@uchicago.edu</a></p>
+    <div class="site-footer__row mono">
+      <span>Last updated November 2026</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <button class="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch to light theme">
+    <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="4.2" />
+      <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.55 1.55M17.15 17.15l1.55 1.55M5.3 18.7l1.55-1.55M17.15 6.85l1.55-1.55" />
+    </svg>
+    <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.4 8.4 0 1 0 10.8 10.8Z" />
+    </svg>
+  </button>
+
+  <dialog class="lightbox" aria-label="Enlarged image">
+    <button class="lightbox__close mono" type="button">Close &times;</button>
+    <img alt="" />
+  </dialog>
+
+  <script src="../../assets/js/main.js" defer></script>
+</body>
+</html>

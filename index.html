@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alan Pham — Physical Interaction Research</title>
+  <meta name="description" content="Alan Pham is an HCI researcher at the University of Chicago building interfaces that sense, move, and change shape." />
+  <meta name="theme-color" content="#0f0f0e" />
+  <!-- TODO(Alan): once the domain is final, add og:image with an ABSOLUTE url, e.g. https://<domain>/assets/media/buoyance.jpg -->
+  <meta property="og:title" content="Alan Pham — Physical Interaction Research" />
+  <meta property="og:description" content="Interfaces that sense, move, and change shape." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+  <!-- Apply saved theme before paint (avoids a flash). Default is dark. -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+      document.documentElement.classList.add("js");
+      // Page transition ("buoyant lift"): if we arrived via an internal link, start the rise-in animation.
+      try {
+        var pt = Number(sessionStorage.getItem("pt") || 0);
+        sessionStorage.removeItem("pt");
+        if (pt && Date.now() - pt < 4000 && !matchMedia("(prefers-reduced-motion: reduce)").matches)
+          document.documentElement.classList.add("pt-enter");
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <a class="site-header__name" href="#top">Alan Pham</a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#news">News</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HERO (typographic + quiet) ============ -->
+    <section class="hero" id="top">
+      <p class="hero__eyebrow mono reveal">HCI Researcher &mdash; University of Chicago</p>
+
+      <h1 class="hero__name reveal" aria-label="Alan Pham">
+        <span class="hero__line">Alan</span>
+        <span class="hero__line hero__line--indent">Pham</span>
+      </h1>
+
+      <!--
+        TODO(Alan): REVISE THIS ONE-LINE STATEMENT.
+        Keep the <em data-fx="..."> wrappers around any words you want animated on hover
+        (fx options: "sense", "move", "shape"), or remove them for plain text.
+      -->
+      <p class="hero__statement reveal" data-todo="Revise one-line research statement">
+        I build interfaces that <em data-fx="sense">sense</em>, <em data-fx="move">move</em>,
+        and <em data-fx="shape">change&nbsp;shape</em>&nbsp;&mdash; bridging computational capabilities and physical interfaces.
+      </p>
+
+      <dl class="hero__meta reveal">
+        <div>
+          <dt class="mono">Currently</dt>
+          <dd>M.S. Computer Science (Pre-Doctoral)<br />The University of Chicago</dd>
+        </div>
+        <div>
+          <dt class="mono">Lab</dt>
+          <dd>Actuated Experience Lab (AxLab)<br />Advised by Ken Nakagaki</dd>
+        </div>
+        <div>
+          <dt class="mono">Based in</dt>
+          <dd>Chicago, IL<br /><span class="mono clock" aria-live="off">&nbsp;</span></dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- ============ RESEARCH (full-screen project sections) ============ -->
+    <section id="research" class="research" aria-label="Selected research">
+
+      <!-- ---- 01 Buoyancé ---- -->
+      <article class="project" id="buoyance" data-motion="float" data-card-href="projects/buoyance/index.html">
+        <div class="project__media">
+          <video muted loop playsinline preload="none" poster="assets/media/buoyance.jpg"
+                 aria-label="Balloons tethered to small ground robots move through a room, mirroring a person's pose.">
+            <source src="assets/media/buoyance.mp4" type="video/mp4" />
+          </video>
+          <button class="media-toggle mono" type="button" aria-label="Pause background video">Pause</button>
+        </div>
+
+        <div class="project__body">
+          <div class="project__top mono">
+            <span>01 / 03</span>
+            <span class="project__venue">UIST &rsquo;25 &middot; Full Paper</span>
+          </div>
+
+          <div class="project__main">
+            <h2 class="project__title" style="--fit: 4.4"><a class="project__title-link" href="projects/buoyance/index.html">Buoyancé</a></h2>
+            <svg class="motif motif--buoy" viewBox="0 0 220 44" aria-hidden="true" focusable="false">
+              <g class="tether" style="--i:0"><line x1="14" y1="17" x2="14" y2="38" /><circle cx="14" cy="12" r="5" /></g><rect class="bot" x="10" y="38" width="8" height="4" rx="1" style="--i:0" /><g class="tether" style="--i:1"><line x1="62" y1="25" x2="62" y2="38" /><circle cx="62" cy="20" r="5" /></g><rect class="bot" x="58" y="38" width="8" height="4" rx="1" style="--i:1" /><g class="tether" style="--i:2"><line x1="110" y1="13" x2="110" y2="38" /><circle cx="110" cy="8" r="5" /></g><rect class="bot" x="106" y="38" width="8" height="4" rx="1" style="--i:2" /><g class="tether" style="--i:3"><line x1="158" y1="21" x2="158" y2="38" /><circle cx="158" cy="16" r="5" /></g><rect class="bot" x="154" y="38" width="8" height="4" rx="1" style="--i:3" /><g class="tether" style="--i:4"><line x1="206" y1="16" x2="206" y2="38" /><circle cx="206" cy="11" r="5" /></g><rect class="bot" x="202" y="38" width="8" height="4" rx="1" style="--i:4" />
+            </svg>
+            <p class="project__sub">Reeling helium-inflated balloons with mobile robots on the ground for mid-air tangible display, interaction, and assembly.</p>
+
+            <ul class="project__links mono">
+              <li><a class="is-primary" href="projects/buoyance/index.html">View project&nbsp;→</a></li>
+              <li><a href="https://doi.org/10.1145/3746059.3747768" target="_blank" rel="noopener">ACM DL&nbsp;↗</a></li>
+            </ul>
+          </div>
+
+          <!-- TODO(Alan): review theme pills -->
+          <ul class="pills" aria-label="Themes" data-todo="Review theme pills">
+            <li>Actuation</li><li>Mechanism Design</li><li>Spatial Interfaces</li><li>Fabrication</li><li>Installation</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- ---- 02 Granular I/O ---- -->
+      <article class="project" id="granular-io" data-motion="granular" data-card-href="projects/granular-io/index.html">
+        <div class="project__media">
+          <video muted loop playsinline preload="none" poster="assets/media/granular-io.jpg"
+                 aria-label="Fingers press and reshape a cluster of red and blue magnetic particles on a white surface.">
+            <source src="assets/media/granular-io.mp4" type="video/mp4" />
+          </video>
+          <button class="media-toggle mono" type="button" aria-label="Pause background video">Pause</button>
+        </div>
+
+        <div class="project__body">
+          <div class="project__top mono">
+            <span>02 / 03</span>
+            <span class="project__venue">UIST &rsquo;26 &middot; Full Paper</span>
+          </div>
+
+          <div class="project__main">
+            <h2 class="project__title" style="--fit: 6.35"><a class="project__title-link" href="projects/granular-io/index.html">Granular I/O</a></h2>
+            <svg class="motif motif--gran" viewBox="0 0 120 30" aria-hidden="true" focusable="false">
+              <circle class="p p--n" cx="15.6" cy="7.5" r="2.7" style="--dx:21.1px;--dy:14.7px;--d:0.04s" /><circle class="p p--s" cx="22.0" cy="7.5" r="2.7" style="--dx:-13.0px;--dy:7.3px;--d:0.28s" /><circle class="p p--n" cx="28.4" cy="7.5" r="2.7" style="--dx:-18.2px;--dy:4.0px;--d:0.05s" /><circle class="p p--n" cx="34.8" cy="7.5" r="2.7" style="--dx:10.0px;--dy:-9.5px;--d:0.12s" /><circle class="p p--s" cx="41.2" cy="7.5" r="2.7" style="--dx:32.3px;--dy:-5.5px;--d:0.22s" /><circle class="p p--s" cx="47.6" cy="7.5" r="2.7" style="--dx:40.2px;--dy:6.1px;--d:0.16s" /><circle class="p p--n" cx="54.0" cy="7.5" r="2.7" style="--dx:19.7px;--dy:9.0px;--d:0.45s" /><circle class="p p--n" cx="60.4" cy="7.5" r="2.7" style="--dx:-31.3px;--dy:-8.8px;--d:0.20s" /><circle class="p p--s" cx="66.8" cy="7.5" r="2.7" style="--dx:18.2px;--dy:3.8px;--d:0.11s" /><circle class="p p--s" cx="73.2" cy="7.5" r="2.7" style="--dx:-24.1px;--dy:5.9px;--d:0.32s" /><circle class="p p--n" cx="79.6" cy="7.5" r="2.7" style="--dx:-12.4px;--dy:19.1px;--d:0.38s" /><circle class="p p--n" cx="86.0" cy="7.5" r="2.7" style="--dx:-29.2px;--dy:-7.4px;--d:0.48s" /><circle class="p p--s" cx="92.4" cy="7.5" r="2.7" style="--dx:-10.7px;--dy:22.1px;--d:0.06s" /><circle class="p p--n" cx="98.8" cy="7.5" r="2.7" style="--dx:1.0px;--dy:-11.1px;--d:0.27s" /><circle class="p p--n" cx="105.2" cy="7.5" r="2.7" style="--dx:-19.4px;--dy:-17.2px;--d:0.32s" /><circle class="p p--s" cx="12.4" cy="13.1" r="2.7" style="--dx:-14.6px;--dy:17.3px;--d:0.33s" /><circle class="p p--s" cx="18.8" cy="13.1" r="2.7" style="--dx:-40.0px;--dy:5.6px;--d:0.52s" /><circle class="p p--n" cx="25.2" cy="13.1" r="2.7" style="--dx:-10.1px;--dy:-8.5px;--d:0.39s" /><circle class="p p--s" cx="31.6" cy="13.1" r="2.7" style="--dx:41.0px;--dy:-0.9px;--d:0.16s" /><circle class="p p--n" cx="38.0" cy="13.1" r="2.7" style="--dx:-9.1px;--dy:-8.1px;--d:0.25s" /><circle class="p p--n" cx="44.4" cy="13.1" r="2.7" style="--dx:14.6px;--dy:6.6px;--d:0.42s" /><circle class="p p--n" cx="50.8" cy="13.1" r="2.7" style="--dx:0.4px;--dy:14.5px;--d:0.48s" /><circle class="p p--n" cx="57.2" cy="13.1" r="2.7" style="--dx:-31.7px;--dy:5.2px;--d:0.49s" /><circle class="p p--s" cx="63.6" cy="13.1" r="2.7" style="--dx:16.9px;--dy:-9.7px;--d:0.23s" /><circle class="p p--n" cx="70.0" cy="13.1" r="2.7" style="--dx:33.5px;--dy:-14.9px;--d:0.08s" /><circle class="p p--n" cx="76.4" cy="13.1" r="2.7" style="--dx:2.8px;--dy:12.2px;--d:0.27s" /><circle class="p p--s" cx="82.8" cy="13.1" r="2.7" style="--dx:-1.4px;--dy:9.0px;--d:0.23s" /><circle class="p p--n" cx="89.2" cy="13.1" r="2.7" style="--dx:-40.9px;--dy:-9.0px;--d:0.38s" /><circle class="p p--s" cx="95.6" cy="13.1" r="2.7" style="--dx:-27.3px;--dy:-12.4px;--d:0.03s" /><circle class="p p--s" cx="102.0" cy="13.1" r="2.7" style="--dx:8.0px;--dy:-20.9px;--d:0.44s" /><circle class="p p--n" cx="108.4" cy="13.1" r="2.7" style="--dx:-16.8px;--dy:6.2px;--d:0.35s" /><circle class="p p--n" cx="15.6" cy="18.6" r="2.7" style="--dx:21.7px;--dy:4.9px;--d:0.09s" /><circle class="p p--n" cx="22.0" cy="18.6" r="2.7" style="--dx:17.0px;--dy:2.9px;--d:0.08s" /><circle class="p p--n" cx="28.4" cy="18.6" r="2.7" style="--dx:-12.3px;--dy:7.1px;--d:0.48s" /><circle class="p p--s" cx="34.8" cy="18.6" r="2.7" style="--dx:14.9px;--dy:10.1px;--d:0.19s" /><circle class="p p--n" cx="41.2" cy="18.6" r="2.7" style="--dx:29.9px;--dy:14.6px;--d:0.55s" /><circle class="p p--n" cx="47.6" cy="18.6" r="2.7" style="--dx:-20.3px;--dy:1.0px;--d:0.06s" /><circle class="p p--n" cx="54.0" cy="18.6" r="2.7" style="--dx:-3.8px;--dy:20.5px;--d:0.09s" /><circle class="p p--n" cx="60.4" cy="18.6" r="2.7" style="--dx:31.2px;--dy:-5.0px;--d:0.08s" /><circle class="p p--s" cx="66.8" cy="18.6" r="2.7" style="--dx:32.3px;--dy:2.8px;--d:0.54s" /><circle class="p p--s" cx="73.2" cy="18.6" r="2.7" style="--dx:-8.4px;--dy:-11.9px;--d:0.20s" /><circle class="p p--n" cx="79.6" cy="18.6" r="2.7" style="--dx:4.5px;--dy:-16.3px;--d:0.43s" /><circle class="p p--n" cx="86.0" cy="18.6" r="2.7" style="--dx:6.9px;--dy:20.1px;--d:0.54s" /><circle class="p p--s" cx="92.4" cy="18.6" r="2.7" style="--dx:14.1px;--dy:-19.2px;--d:0.41s" /><circle class="p p--n" cx="98.8" cy="18.6" r="2.7" style="--dx:-27.8px;--dy:-1.5px;--d:0.02s" /><circle class="p p--n" cx="105.2" cy="18.6" r="2.7" style="--dx:-4.6px;--dy:12.4px;--d:0.38s" /><circle class="p p--s" cx="31.6" cy="24.2" r="2.7" style="--dx:-41.8px;--dy:7.2px;--d:0.54s" /><circle class="p p--s" cx="38.0" cy="24.2" r="2.7" style="--dx:-15.9px;--dy:9.1px;--d:0.12s" /><circle class="p p--n" cx="44.4" cy="24.2" r="2.7" style="--dx:10.0px;--dy:17.0px;--d:0.50s" /><circle class="p p--s" cx="50.8" cy="24.2" r="2.7" style="--dx:-36.0px;--dy:2.3px;--d:0.44s" /><circle class="p p--n" cx="57.2" cy="24.2" r="2.7" style="--dx:-23.2px;--dy:-18.4px;--d:0.43s" /><circle class="p p--s" cx="63.6" cy="24.2" r="2.7" style="--dx:-22.8px;--dy:1.6px;--d:0.43s" /><circle class="p p--n" cx="70.0" cy="24.2" r="2.7" style="--dx:14.2px;--dy:-21.5px;--d:0.22s" /><circle class="p p--n" cx="76.4" cy="24.2" r="2.7" style="--dx:36.2px;--dy:-6.3px;--d:0.09s" /><circle class="p p--n" cx="82.8" cy="24.2" r="2.7" style="--dx:25.2px;--dy:17.6px;--d:0.44s" />
+            </svg>
+            <p class="project__sub">Enabling bi-directional malleable interaction for actuated TUIs with magnetic particles.</p>
+
+            <ul class="project__links mono">
+              <li><a class="is-primary" href="projects/granular-io/index.html">View project&nbsp;→</a></li>
+              <li><a href="https://doi.org/10.1145/3830398.3830589" target="_blank" rel="noopener">ACM DL&nbsp;↗</a></li>
+            </ul>
+          </div>
+
+          <ul class="pills" aria-label="Themes" data-todo="Review theme pills">
+            <li>Materials</li><li>Sensing</li><li>Actuation</li><li>Malleable Interfaces</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- ---- 03 NodeBots ---- -->
+      <article class="project" id="nodebots" data-motion="network" data-card-href="projects/nodebots/index.html">
+        <div class="project__media">
+          <video muted loop playsinline preload="none" poster="assets/media/nodebots.jpg"
+                 aria-label="Hands drag small robots representing graph nodes across a table with a projected network graph.">
+            <source src="assets/media/nodebots.mp4" type="video/mp4" />
+          </video>
+          <button class="media-toggle mono" type="button" aria-label="Pause background video">Pause</button>
+        </div>
+
+        <div class="project__body">
+          <div class="project__top mono">
+            <span>03 / 03</span>
+            <span class="project__venue">UIST &rsquo;26 Adjunct &middot; Demo</span>
+          </div>
+
+          <div class="project__main">
+            <h2 class="project__title" style="--fit: 4.35"><a class="project__title-link" href="projects/nodebots/index.html">NodeBots</a></h2>
+            <svg class="netline" viewBox="0 0 240 24" aria-hidden="true" focusable="false">
+              <path d="M4 12 L52 6 L104 18 L156 8 L204 16 L236 10" />
+              <circle cx="4" cy="12" r="3.2" /><circle cx="52" cy="6" r="3.2" /><circle cx="104" cy="18" r="3.2" />
+              <circle cx="156" cy="8" r="3.2" /><circle cx="204" cy="16" r="3.2" /><circle cx="236" cy="10" r="3.2" />
+            </svg>
+            <p class="project__sub">Physicalizing network-based data with swarm user interfaces.</p>
+
+            <ul class="project__links mono">
+              <li><a class="is-primary" href="projects/nodebots/index.html">View project&nbsp;→</a></li>
+              <li><a href="https://doi.org/10.1145/3830397.3842445" target="_blank" rel="noopener">ACM DL&nbsp;↗</a></li>
+            </ul>
+          </div>
+
+          <ul class="pills" aria-label="Themes" data-todo="Review theme pills">
+            <li>Data Physicalization</li><li>Haptics</li><li>Swarm UIs</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============ PUBLICATIONS (plain, skimmable) ============ -->
+    <section id="publications" class="section">
+      <header class="section__head reveal">
+        <h2 class="section__title">Publications</h2>
+        <p class="section__note mono">Refereed &middot; Reverse chronological</p>
+      </header>
+
+      <ol class="pubs">
+        <li class="pub reveal">
+          <span class="pub__year mono">2026</span>
+          <div>
+            <h3 class="pub__title"><a href="projects/granular-io/index.html">Granular I/O: Enabling Bi-directional Malleable Interaction for Actuated TUIs with Magnetic Particles</a></h3>
+            <p class="pub__authors">Chi Wang, Clara Cui, <strong>Alan Pham</strong>, Justice T Andersen, Tucker Rae-Grant, and Ken Nakagaki</p>
+            <p class="pub__venue"><em>UIST &rsquo;26</em> &mdash; ACM Symposium on User Interface Software and Technology</p>
+            <p class="pub__links mono"><a href="https://doi.org/10.1145/3830398.3830589" target="_blank" rel="noopener">ACM DL&nbsp;↗</a><a href="assets/papers/granular-io-uist26.pdf" target="_blank" rel="noopener">PDF&nbsp;↗</a></p>
+          </div>
+          <span class="pub__type mono">Paper</span>
+        </li>
+        <li class="pub reveal">
+          <span class="pub__year mono">2026</span>
+          <div>
+            <h3 class="pub__title"><a href="projects/nodebots/index.html">NodeBots: Physicalizing Network-Based Data with SwarmUIs</a></h3>
+            <p class="pub__authors">Ramarko Bhattacharya, <strong>Alan Pham</strong>, and Ken Nakagaki</p>
+            <p class="pub__venue"><em>UIST &rsquo;26 Adjunct</em> &mdash; Demo</p>
+            <p class="pub__links mono"><a href="https://doi.org/10.1145/3830397.3842445" target="_blank" rel="noopener">ACM DL&nbsp;↗</a><a href="assets/papers/nodebots-uist26-adjunct.pdf" target="_blank" rel="noopener">PDF&nbsp;↗</a></p>
+          </div>
+          <span class="pub__type mono">Demo</span>
+        </li>
+        <li class="pub reveal">
+          <span class="pub__year mono">2025</span>
+          <div>
+            <h3 class="pub__title"><a href="projects/buoyance/index.html">Buoyancé: Reeling Helium-Inflated Balloons with Mobile Robots on the Ground for Mid-Air Tangible Display, Interaction, and Assembly</a></h3>
+            <p class="pub__authors"><strong>Alan Pham</strong>*, Yuxiao Li*, Miyu Fukuoka, and Ken Nakagaki</p>
+            <p class="pub__venue"><em>UIST &rsquo;25</em> &mdash; ACM Symposium on User Interface Software and Technology</p>
+            <p class="pub__links mono"><a href="https://doi.org/10.1145/3746059.3747768" target="_blank" rel="noopener">ACM DL&nbsp;↗</a><a href="assets/papers/buoyance-uist25.pdf" target="_blank" rel="noopener">PDF&nbsp;↗</a></p>
+          </div>
+          <span class="pub__type mono">Paper</span>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ NEWS / TALKS / EXHIBITIONS ============ -->
+    <section id="news" class="section">
+      <header class="section__head reveal">
+        <h2 class="section__title">News &amp; Exhibitions</h2>
+        <p class="section__note mono">Talks &middot; Demos &middot; Exhibitions</p>
+      </header>
+
+      <ul class="news">
+        <li class="reveal"><span class="news__date mono">Nov 2026</span><p>Co-presented the <em>Granular I/O</em> paper talk at UIST &rsquo;26 and presented the demo; <em>NodeBots</em> demo at UIST &rsquo;26.</p></li>
+        <li class="reveal"><span class="news__date mono">Oct 2026</span><p>Demoed <em>Shape n&rsquo; Swarm</em> at the South Side Science Festival, Chicago.</p></li>
+        <li class="reveal"><span class="news__date mono">Apr 2026</span><p>Guest talk on <em>Buoyancé</em> for CMSC 20380: Actuated User Interfaces and Technology, UChicago.</p></li>
+        <li class="reveal"><span class="news__date mono">Sep 2025</span><p>Presented the <em>Buoyancé</em> paper talk and demo at UIST &rsquo;25, Busan, Korea.</p></li>
+        <li class="reveal news__item--link">
+          <a class="news__row" href="projects/buoyance-tuggle/index.html">
+            <span class="news__date mono">Sep 2025</span>
+            <p>Exhibited <span class="news__title"><em>Buoyancé &ndash; Tug(gle)</em></span> at Ars Electronica Festival, Linz, Austria.</p>
+            <span class="news__arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </li>
+        <li class="reveal"><span class="news__date mono">Oct 2024</span><p>Demoed <em>Buoyancé</em> at the South Side Science Festival, Chicago.</p></li>
+        <li class="reveal"><span class="news__date mono">Jun 2024</span><p>Received the Jeff Metcalf Research Fellowship.</p></li>
+      </ul>
+    </section>
+
+    <!-- ============ TOOLKIT ============ -->
+    <section id="toolkit" class="section">
+      <header class="section__head reveal">
+        <h2 class="section__title">Toolkit</h2>
+        <p class="section__note mono">How I build and evaluate</p>
+      </header>
+
+      <div class="toolkit">
+        <div class="toolkit__group reveal">
+          <h3 class="mono">Hardware &amp; Fabrication</h3>
+          <ul><li>PCB design &amp; soldering</li><li>Motor control</li><li>3D printing</li><li>Fusion 360 &middot; SolidWorks</li><li>M5Stack &middot; ESP32 &middot; Sony toio</li></ul>
+        </div>
+        <div class="toolkit__group reveal">
+          <h3 class="mono">Software</h3>
+          <ul><li>C / C++ (embedded) &middot; Rust</li><li>Python &middot; Java &middot; C#</li><li>JavaScript &middot; p5.js &middot; Processing</li><li>Unity &middot; Arduino</li><li>Figma</li></ul>
+        </div>
+        <div class="toolkit__group reveal">
+          <h3 class="mono">Research Methods</h3>
+          <ul><li>User study design</li><li>Technical evaluation</li><li>Statistical analysis (R, Python)</li><li>Demo &amp; installation deployment</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="section about">
+      <header class="section__head reveal">
+        <h2 class="section__title">About</h2>
+      </header>
+
+      <div class="about__grid">
+        <div class="about__text reveal">
+          <!-- TODO(Alan): revise bio. -->
+          <p class="about__lead" data-todo="Revise bio">
+            I&rsquo;m a pre-doctoral M.S. student in Computer Science at the University of Chicago, working with Professor
+            Ken Nakagaki in the Actuated Experience Lab. I build interactive interfaces that connect technological advancements
+            with physically manipulable interfaces, enabling users to take advantage of computational capabilities while retaining
+            their sense of self.
+          </p>
+          <!-- TODO(Alan): revise "directions" paragraph; this is where you signal breadth beyond swarm UIs. -->
+          <p data-todo="Revise research directions">
+            So far my work has explored actuated and shape-changing interfaces, from room-scale balloons to
+            millimeter-scale magnetic particles. Going forward, I&rsquo;m excited about integrating AI into the loop
+            to allow people to benefit from the physical augmentation and assistance of physically actuated interfaces
+            while retaining their sense of self-agency.
+          </p>
+          <p>I received my B.S. in Computer Science (HCI specialization) and B.A. in Economics from UChicago in 2025.</p>
+        </div>
+
+        <!-- Single headshot used site-wide: assets/headshot.jpg (from GalaHeadShot.jpg) -->
+        <figure class="about__photo reveal">
+            <img src="assets/headshot.jpg" width="800" height="1000" loading="lazy" decoding="async"
+                 alt="Portrait of Alan Pham, smiling, wearing a suit and tie." />
+        </figure>
+        <aside class="about__contact reveal" aria-label="Contact">
+          <h3 class="mono">Contact</h3>
+          <ul class="contact-list">
+            <li><a href="mailto:apham799@uchicago.edu"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect class="ci-stroke" x="3" y="5.5" width="18" height="13" rx="2"/><path class="ci-stroke" d="M3.8 7l8.2 6 8.2-6"/></svg><span>apham799@uchicago.edu</span></a></li>
+            <li><a href="assets/Pham_Alan_CV.pdf" target="_blank" rel="noopener"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="ci-stroke" d="M6.5 3h7.5l4 4v14h-11.5z"/><path class="ci-stroke" d="M14 3v4h4M9.5 12h5M9.5 15.5h5"/></svg><span>Curriculum Vitae (PDF)&nbsp;↗</span></a></li>
+            <li><a href="https://scholar.google.com/citations?user=-Mbz4KUAAAAJ&amp;hl=en" target="_blank" rel="noopener"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2 1.5 9.4 12 15.6l8.6-5.1v5.9h1.9V9.4z"/><path d="M5.2 13.1v3.6c0 1.9 3 3.9 6.8 3.9s6.8-2 6.8-3.9v-3.6L12 17.1z"/></svg><span>Google Scholar&nbsp;↗</span></a></li>
+            <li><a href="https://orcid.org/0009-0005-9224-4284" target="_blank" rel="noopener"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><g class="ci-knock"><rect x="7.15" y="9.6" width="1.75" height="7.4"/><circle cx="8.02" cy="7.35" r="1.1"/><path fill-rule="evenodd" d="M10.6 9.6h3.05c2.45 0 4.15 1.55 4.15 3.7S16.1 17 13.65 17H10.6zm1.75 1.5v4.4h1.25c1.45 0 2.45-.85 2.45-2.2s-1-2.2-2.45-2.2z"/></g></svg><span>ORCID&nbsp;↗</span></a></li>
+            <li><a href="https://www.linkedin.com/in/alan-pham-7798a3224/" target="_blank" rel="noopener"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="19" height="19" rx="3"/><g class="ci-knock"><rect x="6.2" y="9.6" width="2.5" height="8.2"/><circle cx="7.45" cy="6.85" r="1.45"/><path d="M10.6 9.6h2.4v1.15c.5-.8 1.45-1.35 2.7-1.35 2.1 0 3 1.35 3 3.5v4.9h-2.5v-4.45c0-1.05-.4-1.75-1.35-1.75-1 0-1.75.75-1.75 1.85v4.35h-2.5z"/></g></svg><span>LinkedIn&nbsp;↗</span></a></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="site-footer__big">Get in touch &mdash; <a href="mailto:apham799@uchicago.edu">apham799@uchicago.edu</a></p>
+    <div class="site-footer__row mono">
+      <span>Last updated November 2026</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <!-- Theme toggle: floating, bottom-right corner -->
+  <button class="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch to light theme">
+    <!-- sun: shown in light mode (current theme) -->
+    <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="4.2" />
+      <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.55 1.55M17.15 17.15l1.55 1.55M5.3 18.7l1.55-1.55M17.15 6.85l1.55-1.55" />
+    </svg>
+    <!-- moon: shown in dark mode (current theme) -->
+    <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.4 8.4 0 1 0 10.8 10.8Z" />
+    </svg>
+  </button>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

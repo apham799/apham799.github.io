@@ -1,0 +1,12 @@
+# OS / editor clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+.vscode/
+.idea/
+
+# Safety net: originals and raw media belong in ../_source-media, never in the repo.
+# (No *.mp4 rule: Windows ignores case, so it would also hide the site's own video loops.)
+*.zip
+_source-media/

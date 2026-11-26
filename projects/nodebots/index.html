@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NodeBots — Alan Pham</title>
+  <meta name="description" content="Physicalizing network-based data with swarm user interfaces." />
+  <meta name="theme-color" content="#0f0f0e" />
+  <meta property="og:title" content="NodeBots — Alan Pham" />
+  <meta property="og:description" content="Physicalizing network-based data with swarm user interfaces." />
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+      document.documentElement.classList.add("js");
+      // Page transition ("buoyant lift"): if we arrived via an internal link, start the rise-in animation.
+      try {
+        var pt = Number(sessionStorage.getItem("pt") || 0);
+        sessionStorage.removeItem("pt");
+        if (pt && Date.now() - pt < 4000 && !matchMedia("(prefers-reduced-motion: reduce)").matches)
+          document.documentElement.classList.add("pt-enter");
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body class="pp" data-project="nodebots">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="site-header__name" href="../../index.html">Alan Pham</a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#publications">Publications</a>
+      <a href="../../index.html#news">News</a>
+      <a href="../../index.html#about">About</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="pp-hero" id="top">
+      <div class="pp-hero__media">
+        <video muted loop playsinline autoplay preload="auto" poster="../../assets/media/nodebots.jpg" data-autoplay
+               aria-label="Hands drag small robots representing graph nodes across a table with a projected network graph.">
+          <source src="../../assets/media/nodebots.mp4" type="video/mp4" />
+        </video>
+        <button class="media-toggle mono" type="button" aria-label="Pause background video">Pause</button>
+      </div>
+      <div class="pp-hero__body">
+        <a class="pp-back mono" href="../../index.html#nodebots">&larr; All research</a>
+        <p class="pp-hero__venue mono">UIST &rsquo;26 Adjunct &middot; Demo</p>
+        <h1 class="pp-hero__title">NodeBots</h1>
+        <p class="pp-hero__sub">Physicalizing network-based data with swarm user interfaces.</p>
+      </div>
+    </section>
+
+    <!-- ============ META STRIP ============ -->
+    <section class="pp-meta" aria-label="Project details">
+      <div>
+        <h2 class="mono">Venue</h2>
+        <p>ACM UIST &rsquo;26 Adjunct &middot; Demo</p>
+      </div>
+      <div>
+        <h2 class="mono">Authors</h2>
+        <p>Ramarko Bhattacharya, <strong>Alan Pham</strong>, Ken Nakagaki</p>
+      </div>
+      <div>
+        <h2 class="mono">Links</h2>
+        <ul class="pp-meta__links">
+          <li><a href="https://doi.org/10.1145/3830397.3842445" target="_blank" rel="noopener">ACM DL&nbsp;↗</a></li>
+          <li><a href="https://www.youtube.com/watch?v=pgokDRXPr4M" target="_blank" rel="noopener">YouTube&nbsp;↗</a></li>
+          <li><a href="https://www.axlab.cs.uchicago.edu/projects/nodebots" target="_blank" rel="noopener">Lab page&nbsp;↗</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">Abstract</h2>
+      <div class="pp-section__body">
+        <p class="pp-abstract reveal">
+          Data Physicalization is an emerging area of data representation that uses a wide variety of physical mediums and data sources. We propose &lsquo;NodeBots&rsquo;, a novel approach that integrates Swarm User Interfaces (SwarmUIs) with Network Visualizations to create an interactive, swarm-based physicalization of network graphs. NodeBots allows users to physically interact with the nodes of network graphs, creating physical metaphors for embodied graph interactions through the rich affordances of SwarmUIs. In this paper, we explore NodeBots&rsquo; interaction space and its applied interactions, such as sparse cuts and shortest paths.
+        </p>
+        <p class="pp-paper reveal"><a href="../../assets/papers/nodebots-uist26-adjunct.pdf" target="_blank" rel="noopener">Read the paper (PDF)&nbsp;↗</a></p>
+      </div>
+    </section>
+
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">Interaction space</h2>
+      <div class="pp-section__body">
+        <p class="reveal">
+          The interaction space covers <em>Network Perception</em> (seeing nodes and edges, and feeling the network push
+          and pull back), <em>Network Interaction</em> (separating, clustering, and rearranging nodes, or adding physical
+          barriers and constraints), and <em>Network Exploration</em> across local, relational, and global data scopes,
+          with data layers and views.
+        </p>
+      </div>
+    </section>
+
+    <figure class="pp-fig pp-fig--wide pp-fig--narrow pp-fig--diagram reveal">
+      <img src="../../assets/media/nodebots/interaction-space.jpg" width="1024" height="346" loading="lazy" decoding="async"
+           alt="Diagram of the three parts of the interaction space: network perception, network interaction, and network exploration." />
+      <figcaption class="mono">Interaction space</figcaption>
+    </figure>
+
+    <figure class="pp-fig pp-fig--wide reveal">
+      <img src="../../assets/media/nodebots/constraints.jpg" width="2200" height="626" loading="lazy" decoding="async"
+           alt="Two views of the projected airport network: a ruler acting as a barrier across the table, and a node held in place as a constraint." />
+      <figcaption class="mono">Physical constraints: barriers and constraints</figcaption>
+    </figure>
+
+    <figure class="pp-fig pp-fig--wide reveal">
+      <img src="../../assets/media/nodebots/data-modalities.jpg" width="2200" height="1258" loading="lazy" decoding="async"
+           alt="Four views of projected networks: UChicago research areas, HCI researchers, flights between top U.S. airports, and buses between the same cities." />
+      <figcaption class="mono">Data modalities: layers and views</figcaption>
+    </figure>
+
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">Implementation</h2>
+      <div class="pp-section__body">
+        <p class="reveal">
+          Nodes and edge weights are loaded into an Eades force-directed simulation that runs continuously: connected nodes
+          are pulled together and unconnected ones pushed apart. Each node is a toio robot in a custom 3D-printed shell that
+          steers toward its node&rsquo;s position in the simulation, while an overhead projector draws the graph onto the
+          robots. Pushing or pulling a robot changes the simulation and is felt as the network resisting, and physical
+          constraints become computational ones.
+        </p>
+      </div>
+    </section>
+
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">Examples</h2>
+      <div class="pp-section__body">
+        <p class="reveal">
+          Users can physically apply graph algorithms, exploring different <em>sparse cuts</em> that partition a network,
+          or pulling two nodes apart so the tension pulls the <em>shortest path</em> between them taut.
+        </p>
+      </div>
+    </section>
+
+    <figure class="pp-fig pp-fig--wide reveal">
+      <img src="../../assets/media/nodebots/examples.jpg" width="2200" height="626" loading="lazy" decoding="async"
+           alt="Two views of the robots: a ruler partitioning the network into subgraphs, and two nodes pulled apart with the shortest path between them highlighted." />
+      <figcaption class="mono">Applied examples: sparse cuts and shortest path</figcaption>
+    </figure>
+
+    <!-- ============ VIDEO ============ -->
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">Video</h2>
+      <div class="pp-section__body">
+        <div class="yt reveal" data-yt="pgokDRXPr4M">
+          <button class="yt__play" type="button" aria-label="Play the NodeBots video">
+            <img src="../../assets/media/nodebots/video-poster.jpg" width="1600" height="880" loading="lazy" decoding="async" alt="" />
+            <span class="yt__icon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CITE ============ -->
+    <section class="pp-section" id="cite">
+      <h2 class="pp-section__label mono reveal">Cite</h2>
+      <div class="pp-section__body">
+        <p class="pp-cite reveal">
+          Ramarko Bhattacharya, Alan Pham, and Ken Nakagaki. 2026. NodeBots: Physicalizing Network-Based Data with SwarmUIs. In <em>The 39th Annual ACM Symposium on User Interface Software and Technology (UIST Adjunct &rsquo;26)</em>, November 02&ndash;05, 2026, Detroit, MI, USA. ACM, New York, NY, USA, 3 pages.
+          <a href="https://doi.org/10.1145/3830397.3842445" target="_blank" rel="noopener">https://doi.org/10.1145/3830397.3842445</a>
+        </p>
+        <!-- TODO(Alan): replace with the BibTeX from ACM's "Export Citation" (adds the article number) -->
+        <div class="bibtex reveal" data-todo="Replace with ACM BibTeX export">
+          <button class="bibtex__copy" type="button" aria-label="Copy BibTeX" title="Copy BibTeX">
+            <svg class="bibtex__icon bibtex__icon--copy" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="8.5" y="8.5" width="11" height="11" rx="2" /><path d="M15.5 8.5V6.5a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h2" /></svg>
+            <svg class="bibtex__icon bibtex__icon--done" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+          </button>
+<pre><code>@inproceedings{10.1145/3830397.3842445,
+author = {Bhattacharya, Ramarko and Pham, Alan and Nakagaki, Ken},
+title = {NodeBots: Physicalizing Network-Based Data with SwarmUIs},
+year = {2026},
+isbn = {9798400728556},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3830397.3842445},
+doi = {10.1145/3830397.3842445},
+booktitle = {Adjunct Proceedings of the 39th Annual ACM Symposium on User Interface Software and Technology},
+numpages = {3},
+keywords = {Actuated Tangible User Interface, Embodied Interaction, SwarmUIs, Network Graphs},
+location = {Detroit, MI, USA},
+series = {UIST Adjunct '26}
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="pp-end">
+      <ul class="pills" aria-label="Themes">
+        <li>Data Physicalization</li><li>Haptics</li><li>Swarm UIs</li>
+      </ul>
+      <a class="pp-next" href="../buoyance/index.html">
+        <span class="mono">Next project</span>
+        <span class="pp-next__title">Buoyancé &rarr;</span>
+      </a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="site-footer__big">Get in touch &mdash; <a href="mailto:apham799@uchicago.edu">apham799@uchicago.edu</a></p>
+    <div class="site-footer__row mono">
+      <span>Last updated November 2026</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <button class="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch to light theme">
+    <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="4.2" />
+      <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.55 1.55M17.15 17.15l1.55 1.55M5.3 18.7l1.55-1.55M17.15 6.85l1.55-1.55" />
+    </svg>
+    <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.4 8.4 0 1 0 10.8 10.8Z" />
+    </svg>
+  </button>
+
+  <dialog class="lightbox" aria-label="Enlarged image">
+    <button class="lightbox__close mono" type="button">Close &times;</button>
+    <img alt="" />
+  </dialog>
+
+  <script src="../../assets/js/main.js" defer></script>
+</body>
+</html>

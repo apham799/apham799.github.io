@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Buoyancé — Alan Pham</title>
+  <meta name="description" content="Buoyancé (UIST '25): a spatially actuated tangible UI that controls helium-inflated balloons in mid-air using mobile reeling robots (ReelBots)." />
+  <meta name="theme-color" content="#0f0f0e" />
+  <meta property="og:title" content="Buoyancé — Alan Pham" />
+  <meta property="og:description" content="Reeling helium-inflated balloons with mobile robots on the ground for mid-air tangible display, interaction, and assembly. UIST '25." />
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+      document.documentElement.classList.add("js");
+      // Page transition ("buoyant lift"): if we arrived via an internal link, start the rise-in animation.
+      try {
+        var pt = Number(sessionStorage.getItem("pt") || 0);
+        sessionStorage.removeItem("pt");
+        if (pt && Date.now() - pt < 4000 && !matchMedia("(prefers-reduced-motion: reduce)").matches)
+          document.documentElement.classList.add("pt-enter");
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body class="pp" data-project="buoyance">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="site-header__name" href="../../index.html">Alan Pham</a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#publications">Publications</a>
+      <a href="../../index.html#news">News</a>
+      <a href="../../index.html#about">About</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="pp-hero" id="top">
+      <div class="pp-hero__media">
+        <video muted loop playsinline autoplay preload="auto" poster="../../assets/media/buoyance.jpg" data-autoplay
+               aria-label="Balloons tethered to small ground robots move through a room, mirroring a person's pose.">
+          <source src="../../assets/media/buoyance.mp4" type="video/mp4" />
+        </video>
+        <button class="media-toggle mono" type="button" aria-label="Pause background video">Pause</button>
+      </div>
+      <div class="pp-hero__body">
+        <a class="pp-back mono" href="../../index.html#buoyance">&larr; All research</a>
+        <p class="pp-hero__venue mono">UIST &rsquo;25 &middot; Full Paper</p>
+        <h1 class="pp-hero__title">Buoyancé</h1>
+        <p class="pp-hero__sub">Reeling helium-inflated balloons with mobile robots on the ground for mid-air tangible display, interaction, and assembly.</p>
+      </div>
+    </section>
+
+    <!-- ============ META STRIP ============ -->
+    <section class="pp-meta" aria-label="Project details">
+      <div>
+        <h2 class="mono">Venue</h2>
+        <p>ACM UIST &rsquo;25 &middot; Paper talk &amp; demo</p>
+      </div>
+      <div>
+        <h2 class="mono">Authors</h2>
+        <p><strong>Alan Pham</strong>*, Yuxiao Li*, Miyu Fukuoka, Ken Nakagaki</p>
+      </div>
+      <div>
+        <h2 class="mono">Links</h2>
+        <ul class="pp-meta__links">
+          <li><a href="https://doi.org/10.1145/3746059.3747768" target="_blank" rel="noopener">ACM DL&nbsp;↗</a></li>
+          <li><a href="https://www.youtube.com/watch?v=v9mNKIILt_s" target="_blank" rel="noopener">YouTube&nbsp;↗</a></li>
+          <li><a href="https://www.axlab.cs.uchicago.edu/projects/buoyanc%C3%A9" target="_blank" rel="noopener">Lab page&nbsp;↗</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ ABSTRACT ============ -->
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">Abstract</h2>
+      <div class="pp-section__body">
+        <p class="pp-abstract reveal">
+          We introduce a novel approach to spatially actuated tangible UI by controlling helium-inflated balloons (HIBs)
+          in mid-air using mobile reeling robots, named ReelBots. With a relatively compact device form factor, the robots
+          can manipulate HIBs in an extensive vertical range, reaching relatively high altitudes (20&nbsp;m or more),
+          thanks to its reeling mechanisms. The hardware offers diverse interactive functionalities and applications for
+          representing abstract data in 3D space, reconfiguring lights and cameras in an everyday space, and assembling
+          HIBs into diverse configurations. Our proof-of-concept implementation was developed based on omnidirectional
+          mobile robots and a motion tracking system to demonstrate the novel approach of enriching 3D physical space.
+          Our control software is designed to manipulate multiple robots to control the position of HIBs in real time via
+          multiple options ranging from GUI control and tangible and gesture based controls.
+        </p>
+        <p class="pp-paper reveal"><a href="../../assets/papers/buoyance-uist25.pdf" target="_blank" rel="noopener">Read the paper (PDF)&nbsp;↗</a></p>
+      </div>
+    </section>
+
+
+    <figure class="pp-fig pp-fig--wide reveal">
+      <img src="../../assets/media/buoyance/circle.jpg" width="1280" height="496" loading="lazy" decoding="async"
+           alt="A person stands with arms outstretched, surrounded by a ring of black balloons floating at different heights." />
+    </figure>
+
+    <!-- ============ SYSTEM ============ -->
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">System</h2>
+      <div class="pp-section__body">
+        <!-- TODO(Alan): review system description -->
+        <p class="reveal" data-todo="Review system description">
+          Each ReelBot is an omnidirectional mobile robot with a motorized reel. Its string tethers one balloon, so the
+          robot sets the balloon&rsquo;s horizontal position by driving and its height by reeling. A motion tracking
+          system follows the robots, balloons, and people, and the control software coordinates multiple robots in
+          real time through a GUI, tangible, and gesture-based control.
+        </p>
+      </div>
+    </section>
+
+    <figure class="pp-fig pp-fig--wide pp-fig--diagram reveal">
+      <img src="../../assets/media/buoyance/system.jpg" width="2200" height="778" loading="lazy" decoding="async"
+           alt="Diagram of the overall software architecture with OptiTrack cameras and a control GUI, next to a labeled ReelBot hardware design showing the motor, reel, M5Stack boards, and tracking markers." />
+      <figcaption class="mono">Software architecture and ReelBot hardware design</figcaption>
+    </figure>
+
+    <figure class="pp-fig pp-fig--wide pp-fig--diagram reveal">
+      <img src="../../assets/media/buoyance/design-space.jpg" width="2400" height="944" loading="lazy" decoding="async"
+           alt="Design space diagram covering basic setup and configurations, balloon control based on ReelBots, interaction and affordances, and utility and applications." />
+      <figcaption class="mono">Design space: configurations, balloon control, interaction, and applications</figcaption>
+    </figure>
+
+    <!-- ============ INTERACTION ============ -->
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">Interaction</h2>
+      <div class="pp-section__body">
+        <p class="reveal">
+          Balloons can be controlled in three ways: by pulling on the string (<em>via-string tangible control</em>),
+          by grabbing and moving the balloon itself (<em>direct tangible control</em>), or with hand gestures near
+          the balloon (<em>nearby gesture control</em>).
+        </p>
+      </div>
+    </section>
+
+    <div class="pp-pair">
+      <figure class="pp-fig reveal">
+        <img src="../../assets/media/buoyance/interaction.jpg" width="2000" height="1124" loading="lazy" decoding="async"
+             alt="Two people interact with floating balloons in a white room while ReelBots sit on the floor beneath them." />
+      </figure>
+      <figure class="pp-fig pp-fig--diagram reveal">
+        <img src="../../assets/media/buoyance/control-methods.jpg" width="1050" height="992" loading="lazy" decoding="async"
+             alt="Hand and finger tracking markers, and three photos showing via-string tangible control, direct tangible control, and nearby gesture control." />
+        <figcaption class="mono">Three control methods</figcaption>
+      </figure>
+    </div>
+
+    <!-- ============ APPLICATIONS ============ -->
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">Applications</h2>
+      <div class="pp-section__body">
+        <p class="reveal">
+          We explored information display (balloons tracing real-scale animals or mirroring a person&rsquo;s pose),
+          room-scale data physicalization, spatial lighting, a remotely controlled room-inspection camera, lifting
+          and storing robots, and assembling balloons into letters and larger shapes.
+        </p>
+      </div>
+    </section>
+
+    <figure class="pp-fig pp-fig--wide reveal">
+      <img src="../../assets/media/buoyance/applications-a.jpg" width="2200" height="1090" loading="lazy" decoding="async"
+           alt="Collage of applications: people interacting with balloons, balloons arranged as an elephant and a giraffe, and balloons mirroring a person's pose." />
+      <figcaption class="mono">Information display and interaction applications</figcaption>
+    </figure>
+
+    <div class="pp-pair">
+      <figure class="pp-fig reveal">
+        <img src="../../assets/media/buoyance/light.jpg" width="1280" height="1126" loading="lazy" decoding="async"
+             alt="In a dark room, a person reaches up to a glowing white balloon." />
+        <figcaption class="mono">Spatial lighting</figcaption>
+      </figure>
+      <figure class="pp-fig reveal">
+        <img src="../../assets/media/buoyance/reel-assembly.jpg" width="1342" height="570" loading="lazy" decoding="async"
+             alt="Two panels: cube-shaped balloons lifted in a row above a person, and a person guiding joined balloons downward." />
+        <figcaption class="mono">Mid-air assembly</figcaption>
+        <img class="pp-fig__stack" src="../../assets/media/buoyance/assembly.jpg" width="1770" height="436" loading="lazy" decoding="async"
+             alt="Sequence of cube balloons being joined into a letter shape, and a person holding a row of joined balloons." />
+      </figure>
+    </div>
+
+    <figure class="pp-fig pp-fig--wide reveal">
+      <img src="../../assets/media/buoyance/applications-b.jpg" width="2200" height="562" loading="lazy" decoding="async"
+           alt="Applications: a lighting setup with a person on a ladder, a remote camera view on a laptop, and robots lifted and stored on a coat rack." />
+      <figcaption class="mono">Lighting, remote room inspection, and robot storage</figcaption>
+    </figure>
+
+    <!-- ============ EVALUATION ============ -->
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">Evaluation</h2>
+      <div class="pp-section__body">
+        <p class="reveal">
+          A technical evaluation measured reeling speed, lift capacity, and assembly-joint performance. A user study
+          (N&nbsp;=&nbsp;12) compared the three control methods on comfort, intuitiveness, and enjoyment, across target
+          heights from below the knee to out of reach.
+        </p>
+      </div>
+    </section>
+
+    <figure class="pp-fig pp-fig--wide pp-fig--diagram pp-fig--narrow reveal">
+      <img src="../../assets/media/buoyance/user-study.jpg" width="1899" height="1244" loading="lazy" decoding="async"
+           alt="Bar charts of Likert ratings for each control method and measured targeting times, comparing via-string, direct tangible, and nearby gesture control." />
+      <figcaption class="mono">User study results</figcaption>
+    </figure>
+
+
+    <!-- ============ VIDEO ============ -->
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">Video</h2>
+      <div class="pp-section__body">
+        <div class="yt reveal" data-yt="v9mNKIILt_s">
+          <button class="yt__play" type="button" aria-label="Play the Buoyancé video">
+            <img src="../../assets/media/buoyance/video-poster.jpg" width="1600" height="900" loading="lazy" decoding="async" alt="" />
+            <span class="yt__icon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RELATED ============
+         Exhibitions, press, awards, talks. Copy an <li> to add one; set the type label and link.
+         Internal pages open in the same tab; external links get target="_blank" and a ↗ arrow. -->
+    <section class="pp-section">
+      <h2 class="pp-section__label mono reveal">Related</h2>
+      <div class="pp-section__body">
+        <ul class="pp-related reveal">
+          <li>
+            <a class="pp-related__item pp-related__item--media" href="../buoyance-tuggle/index.html">
+              <span class="pp-related__media" aria-hidden="true">
+                <video muted loop playsinline preload="none" poster="../../assets/media/tuggle/hero.jpg" data-inview>
+                  <source src="../../assets/media/tuggle/hero.mp4" type="video/mp4" />
+                </video>
+              </span>
+              <span class="pp-related__type mono">Exhibition</span>
+              <span class="pp-related__main">
+                <span class="pp-related__title">Buoyancé &ndash; Tug(gle)</span>
+                <span class="pp-related__meta">Ars Electronica Festival 2025 &middot; Linz, Austria</span>
+              </span>
+              <span class="pp-related__arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CITE ============ -->
+    <section class="pp-section" id="cite">
+      <h2 class="pp-section__label mono reveal">Cite</h2>
+      <div class="pp-section__body">
+        <p class="pp-cite reveal">
+          Alan Pham*, Yuxiao Li*, Miyu Fukuoka, and Ken Nakagaki. 2025. Buoyancé: Reeling Helium-Inflated Balloons with
+          Mobile Robots on the Ground for Mid-Air Tangible Display, Interaction, and Assembly. In <em>Proceedings of the
+          38th Annual ACM Symposium on User Interface Software and Technology (UIST &rsquo;25)</em>, Busan, Republic of Korea.
+          ACM, New York, NY, USA, Article 174, 19 pages.
+          <a href="https://doi.org/10.1145/3746059.3747768" target="_blank" rel="noopener">https://doi.org/10.1145/3746059.3747768</a>
+        </p>
+        <div class="bibtex reveal">
+          <button class="bibtex__copy" type="button" aria-label="Copy BibTeX" title="Copy BibTeX">
+            <svg class="bibtex__icon bibtex__icon--copy" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="8.5" y="8.5" width="11" height="11" rx="2" /><path d="M15.5 8.5V6.5a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h2" /></svg>
+            <svg class="bibtex__icon bibtex__icon--done" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+          </button>
+<pre><code>@inproceedings{10.1145/3746059.3747768,
+author = {Pham, Alan and Li, Yuxiao and Fukuoka, Miyu and Nakagaki, Ken},
+title = {Buoyanc{\'e}: Reeling Helium-Inflated Balloons with Mobile Robots on the Ground for Mid-Air Tangible Display, Interaction, and Assembly},
+year = {2025},
+isbn = {9798400720376},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3746059.3747768},
+doi = {10.1145/3746059.3747768},
+abstract = {We introduce a novel approach to spatially actuated tangible UI by controlling helium-inflated balloons (HIBs) in mid-air using mobile reeling robots, named ReelBots. With a relatively compact device form factor, the robots can manipulate HIBs in an extensive vertical range, reaching relatively high altitudes (20m or more), thanks to its reeling mechanisms. The hardware offers diverse interactive functionalities and applications for representing abstract data in 3D space, reconfiguring lights and cameras in an everyday space, and assembling HIBs into diverse configurations. Our proof-of-concept implementation was developed based on omnidirectional mobile robots and a motion tracking system to demonstrate the novel approach of enriching 3D physical space. Our control software is designed to manipulate multiple robots to control the position of HIBs in real time via multiple options ranging from GUI control and tangible and gesture based controls.},
+booktitle = {Proceedings of the 38th Annual ACM Symposium on User Interface Software and Technology},
+articleno = {174},
+numpages = {19},
+keywords = {Actuated Tangible User Interface, Spatial User Interface Display, Human-Robot Interaction, Mid-air Assembly, Embodied Interaction},
+location = {Busan, Republic of Korea},
+series = {UIST '25}
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ THEMES + NEXT ============ -->
+    <section class="pp-end">
+      <ul class="pills" aria-label="Themes">
+        <li>Actuation</li><li>Mechanism Design</li><li>Spatial Interfaces</li><li>Fabrication</li><li>Installation</li>
+      </ul>
+      <a class="pp-next" href="../granular-io/index.html">
+        <span class="mono">Next project</span>
+        <span class="pp-next__title">Granular I/O &rarr;</span>
+      </a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="site-footer__big">Get in touch &mdash; <a href="mailto:apham799@uchicago.edu">apham799@uchicago.edu</a></p>
+    <div class="site-footer__row mono">
+      <span>Last updated November 2026</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <button class="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch to light theme">
+    <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="4.2" />
+      <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.55 1.55M17.15 17.15l1.55 1.55M5.3 18.7l1.55-1.55M17.15 6.85l1.55-1.55" />
+    </svg>
+    <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.4 8.4 0 1 0 10.8 10.8Z" />
+    </svg>
+  </button>
+
+  <dialog class="lightbox" aria-label="Enlarged image">
+    <button class="lightbox__close mono" type="button">Close &times;</button>
+    <img alt="" />
+  </dialog>
+
+  <script src="../../assets/js/main.js" defer></script>
+</body>
+</html>
