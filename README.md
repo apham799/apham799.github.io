@@ -33,7 +33,7 @@ requests on load.
 ## Structure
 
 ```
-index.html                  home: research, publications, news, toolkit, about
+index.html                  home: research, publications, news, about
 projects/<name>/index.html  one page per project or exhibition
 assets/css/style.css        all styles (theme colors are defined at the top)
 assets/js/main.js           interactions: theme, reveals, video, page transitions, lightbox, BibTeX copy
