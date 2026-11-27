@@ -11,10 +11,10 @@ benefit from computation and robotics while keeping a sense of agency.
 
 | Project | Venue | |
 |---|---|---|
-| **Buoyancé**: Reeling helium-inflated balloons with mobile robots on the ground for mid-air tangible display, interaction, and assembly | UIST '25 · Full paper | [Page](projects/buoyance/) · [DOI](https://doi.org/10.1145/3746059.3747768) |
-| **Buoyancé – Tug(gle)**: installation at Ars Electronica Festival 2025, Linz | Exhibition | [Page](projects/buoyance-tuggle/) |
-| **Granular I/O**: Bi-directional malleable interaction for actuated TUIs with magnetic particles | UIST '26 · Full paper | [Page](projects/granular-io/) · [DOI](https://doi.org/10.1145/3830398.3830589) |
-| **NodeBots**: Physicalizing network-based data with swarm user interfaces | UIST '26 Adjunct · Demo | [Page](projects/nodebots/) · [DOI](https://doi.org/10.1145/3830397.3842445) |
+| **Buoyancé**: Reeling helium-inflated balloons with mobile robots on the ground for mid-air tangible display, interaction, and assembly | UIST '25 · Full paper | [Page](https://apham799.github.io/projects/buoyance/) · [DOI](https://doi.org/10.1145/3746059.3747768) |
+| **Buoyancé – Tug(gle)**: installation at Ars Electronica Festival 2025, Linz | Exhibition | [Page](https://apham799.github.io/projects/buoyance-tuggle/) |
+| **Granular I/O**: Bi-directional malleable interaction for actuated TUIs with magnetic particles | UIST '26 · Full paper | [Page](https://apham799.github.io/projects/granular-io/) · [DOI](https://doi.org/10.1145/3830398.3830589) |
+| **NodeBots**: Physicalizing network-based data with swarm user interfaces | UIST '26 Adjunct · Demo | [Page](https://apham799.github.io/projects/nodebots/) · [DOI](https://doi.org/10.1145/3830397.3842445) |
 
 ## About the site
 
