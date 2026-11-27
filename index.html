@@ -53,15 +53,39 @@
 
     <!-- ============ HERO (typographic + quiet) ============ -->
     <section class="hero" id="top">
-      <p class="hero__eyebrow mono reveal">HCI Researcher &mdash; University of Chicago</p>
-
+      <!-- Background montage: four hero-only loops (assets/media/hero/) crossfade behind the hero text (main.js: "hero montage").
+           Deliberately different shots from the project cards below. -->
+      <div class="hero__bg" aria-hidden="true">
+        <video muted loop playsinline preload="none" poster="assets/media/hero/tuggle.jpg" class="is-active"
+               data-title="Buoyanc&eacute;&nbsp;&ndash; Tug(gle)" data-venue="Ars Electronica 2025" data-href="projects/buoyance-tuggle/index.html">
+          <source src="assets/media/hero/tuggle.mp4" type="video/mp4" />
+        </video>
+        <video muted loop playsinline preload="none" poster="assets/media/hero/buoyance.jpg"
+               data-title="Buoyanc&eacute;" data-venue="UIST &rsquo;25" data-href="projects/buoyance/index.html">
+          <source src="assets/media/hero/buoyance.mp4" type="video/mp4" />
+        </video>
+        <video muted loop playsinline preload="none" poster="assets/media/hero/granular-io.jpg"
+               data-title="Granular I/O" data-venue="UIST &rsquo;26" data-href="projects/granular-io/index.html">
+          <source src="assets/media/hero/granular-io.mp4" type="video/mp4" />
+        </video>
+        <video muted loop playsinline preload="none" poster="assets/media/hero/nodebots.jpg"
+               data-title="NodeBots" data-venue="UIST &rsquo;26 Adjunct" data-href="projects/nodebots/index.html">
+          <source src="assets/media/hero/nodebots.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="hero__now mono reveal">
+        <span class="hero__now-label">Now showing</span>
+        <a class="hero__now-link" href="projects/buoyance-tuggle/index.html"><span class="hero__now-title">Buoyanc&eacute;&nbsp;&ndash; Tug(gle)</span> &middot; <span class="hero__now-venue">Ars Electronica 2025</span>&nbsp;&rarr;</a>
+        <button class="hero__now-toggle" type="button" aria-label="Pause background video">Pause</button>
+      </div>
       <h1 class="hero__name reveal" aria-label="Alan Pham">
         <span class="hero__line">Alan</span>
         <span class="hero__line hero__line--indent">Pham</span>
       </h1>
+      <p class="hero__eyebrow mono reveal">HCI Researcher &mdash; University of Chicago</p>
       <!-- Words wrapped in <em data-fx="sense|move|shape"> react to the cursor. -->
       <p class="hero__statement reveal">
-        I build interfaces that <em data-fx="sense">sense</em>, <em data-fx="move">move</em>,
+        I build physically interactive systems that <em data-fx="sense">sense</em>, <em data-fx="move">move</em>,
         and <em data-fx="shape">change&nbsp;shape</em>&nbsp;&mdash; bridging computational capabilities and physical interfaces.
       </p>
 
@@ -121,6 +145,7 @@
 
         </div>
       </article>
+      <div class="project-dwell" aria-hidden="true"></div>
 
       <!-- ---- 02 Granular I/O ---- -->
       <article class="project" id="granular-io" data-motion="granular" data-card-href="projects/granular-io/index.html">
@@ -153,6 +178,7 @@
 
         </div>
       </article>
+      <div class="project-dwell" aria-hidden="true"></div>
 
       <!-- ---- 03 NodeBots ---- -->
       <article class="project" id="nodebots" data-motion="network" data-card-href="projects/nodebots/index.html">
@@ -187,6 +213,7 @@
 
         </div>
       </article>
+      <div class="project-dwell" aria-hidden="true"></div>
     </section>
 
     <!-- ============ PUBLICATIONS (plain, skimmable) ============ -->

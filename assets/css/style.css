@@ -209,33 +209,96 @@ strong { font-weight: 600; }
 .hero {
   min-height: 100svh;
   display: grid;
-  grid-template-rows: 1fr auto auto auto 1fr auto;
-  gap: clamp(1.25rem, 3vh, 2.25rem);
+  /* text block sits in the lower-left; the open space above and to the right belongs to the montage */
+  grid-template-rows: 1fr auto auto auto auto;
+  gap: clamp(0.9rem, 2.2vh, 1.5rem);
   padding: calc(var(--header-h) + 2rem) var(--pad) 2rem;
   max-width: var(--maxw); margin: 0 auto;
+  position: relative; isolation: isolate;
 }
-.hero__eyebrow { grid-row: 2; color: var(--fg-2); }
+html, body { overflow-x: clip; }   /* the full-bleed montage is 100vw wide */
+
+/* ---------- hero background montage ---------- */
+.hero__bg {
+  position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; margin-left: -50vw;
+  z-index: -1; overflow: hidden; background: var(--bg);
+}
+.hero__bg video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transform: scale(1.04);
+  transition: opacity 1.8s var(--ease), transform 9s linear;
+}
+.hero__bg video.is-active { opacity: 1; transform: scale(1); }
+/* Granular I/O: the platform and particles sit at the top of the frame, so shift this clip down
+   (the bottom of the frame is under the heavy bottom wash anyway) and fade its top edge */
+.hero__bg video[data-href*="granular-io"] {
+  top: 7%; height: 100%;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 10%);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 10%);
+}
+/* wash so the type stays readable: strongest on the left (name), lighter on the right, fading into the page below */
+.hero__bg::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--bg) 72%, transparent) 0%, color-mix(in srgb, var(--bg) 45%, transparent) 50%, color-mix(in srgb, var(--bg) 22%, transparent) 100%),
+    linear-gradient(0deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 82%, transparent) 30%, color-mix(in srgb, var(--bg) 25%, transparent) 62%, transparent 80%),
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 65%, transparent) 0%, transparent 18%);
+}
+[data-theme="light"] .hero__bg::after {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--bg) 80%, transparent) 0%, color-mix(in srgb, var(--bg) 55%, transparent) 50%, color-mix(in srgb, var(--bg) 32%, transparent) 100%),
+    linear-gradient(0deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 88%, transparent) 30%, color-mix(in srgb, var(--bg) 35%, transparent) 62%, transparent 80%),
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 70%, transparent) 0%, transparent 18%);
+}
+
+.hero__now {
+  position: absolute; right: var(--pad); top: calc(var(--header-h) + 1.25rem);
+  display: flex; align-items: center; gap: 0.75rem; color: var(--fg-2);
+}
+.hero__now-link { text-decoration: none; color: var(--fg); transition: opacity 0.4s, color 0.3s; }
+.hero__now-link:hover { color: var(--accent-ink); }
+.hero__now-link.is-swapping { opacity: 0; }
+.hero__now-toggle {
+  font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer;
+  color: var(--fg); background: color-mix(in srgb, var(--bg) 60%, transparent);
+  border: 1px solid var(--line); border-radius: 999px; padding: 0.3rem 0.7rem;
+}
+.hero__now-toggle:hover { border-color: var(--fg-2); }
+@media (max-width: 900px) {
+  .project__body { transform: none; opacity: 1; }
+  .project-dwell { display: none; }   /* cards aren't sticky on small screens */
+  /* small screens: caption sits at the bottom-right of the hero, one line, clear of the text */
+  .hero__now { top: auto; bottom: 1rem; right: var(--pad); left: var(--pad); justify-content: flex-end; flex-wrap: nowrap; gap: 0.5rem; }
+  .hero__now-label { display: none; }
+  .hero__now-link { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .hero { padding-bottom: 3.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__bg video { transition: none; transform: none; }
+  .hero__now-toggle { display: none; }
+}
+.hero__eyebrow { grid-row: 3; color: var(--fg-2); margin-top: -0.35rem; }   /* sits just under the name */
 .hero__name {
-  grid-row: 3;
+  grid-row: 2;
   font-family: var(--font-serif); font-weight: 400;
-  font-size: clamp(4.5rem, 15vw, 13.5rem);
-  line-height: 0.86; letter-spacing: -0.02em;
+  font-size: clamp(2.75rem, 5.6vw, 5.5rem);
+  line-height: 1.02; letter-spacing: -0.015em;
 }
-.hero__line { display: block; }
-.hero__line--indent { padding-left: 0.9em; }
+.hero__line { display: inline; }          /* one line: "Alan Pham" */
+.hero__line--indent { padding-left: 0; }
 .hero__statement {
   grid-row: 4;
-  max-width: 30ch;
-  font-size: clamp(1.4rem, 2.8vw, 2.35rem);
-  line-height: 1.22; font-weight: 300; letter-spacing: -0.01em;
-  margin-left: auto; margin-right: 0;
+  max-width: 36ch;
+  font-size: clamp(1.15rem, 1.75vw, 1.6rem);
+  line-height: 1.35; font-weight: 300; letter-spacing: -0.005em;
+  margin: 0 0 clamp(0.75rem, 2vh, 1.5rem);
 }
 .hero__statement em {
   font-style: normal; font-weight: 400; color: var(--accent-ink);
   cursor: default; white-space: nowrap;
 }
 .hero__meta {
-  grid-row: 6;
+  grid-row: 5;
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem;
   border-top: 1px solid var(--line); padding-top: 1.25rem;
   font-size: 0.95rem; color: var(--fg);
@@ -254,6 +317,9 @@ strong { font-weight: 600; }
 
 /* ---------- research: full-screen project sections ---------- */
 .research { position: relative; }
+/* Each card stays pinned (sticky) while this spacer scrolls past, so it can be seen in full
+   before the next card slides up over it. */
+.project-dwell { height: 18svh; pointer-events: none; }
 /* section heading above the full-screen project cards, matching the other sections */
 .research__intro {
   position: relative; z-index: 1; background: var(--bg);
@@ -302,6 +368,15 @@ strong { font-weight: 600; }
   display: flex; flex-direction: column; justify-content: space-between;
   padding: calc(var(--header-h) + 2rem) var(--pad) 1.75rem;
   max-width: min(44rem, 52%);
+}
+/* exit motion (see exitCards in main.js): --out goes 0 → 1 while the next card covers this one */
+.project { --out: 0; }
+.project__body {
+  transform-origin: 0% 40%;
+  /* rises ahead of the incoming card's edge so the shrink + fade stay in view */
+  transform: translateY(calc(var(--out) * -52vh)) scale(calc(1 - var(--out) * 0.16));
+  opacity: max(0, calc(1 - var(--out) * 1.45));
+  will-change: transform, opacity;
 }
 .project__top { display: flex; gap: 1.25rem; color: var(--fg-2); }
 .project__venue { color: var(--accent-ink); }
@@ -540,9 +615,11 @@ strong { font-weight: 600; }
 /* ---------- generic reveal ---------- */
 .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
 .js .reveal.is-in { opacity: 1; transform: none; }
-.js .hero .reveal:nth-child(2) { transition-delay: 0.1s; }
-.js .hero .reveal:nth-child(3) { transition-delay: 0.35s; }
-.js .hero .reveal:nth-child(4) { transition-delay: 0.6s; }
+.js .hero .hero__name.reveal { transition-delay: 0.1s; }
+.js .hero .hero__eyebrow.reveal { transition-delay: 0.25s; }
+.js .hero .hero__statement.reveal { transition-delay: 0.4s; }
+.js .hero .hero__meta.reveal { transition-delay: 0.6s; }
+.js .hero .hero__now.reveal { transition-delay: 0.8s; }
 
 /* ---------- ?todo mode: highlight everything marked for revision ---------- */
 .show-todos [data-todo] { outline: 1.5px dashed #f5c518; outline-offset: 4px; position: relative; }

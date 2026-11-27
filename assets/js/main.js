@@ -165,12 +165,43 @@
     var kick = function () { setTargets(); if (!running) { running = true; requestAnimationFrame(frame); } };
 
     var statement = document.querySelector(".hero__statement");
+    var introActive = false, userTookOver = false;
     window.addEventListener("pointermove", function (e) {
       var r = statement.getBoundingClientRect();
       var near = e.clientX > r.left - RADIUS && e.clientX < r.right + RADIUS && e.clientY > r.top - RADIUS && e.clientY < r.bottom + RADIUS;
-      if (near) { pointer = { x: e.clientX, y: e.clientY }; kick(); }
-      else if (pointer) { pointer = null; kick(); }
+      if (near) { userTookOver = true; pointer = { x: e.clientX, y: e.clientY }; kick(); }
+      else if (pointer && !introActive) { pointer = null; kick(); }
     }, { passive: true });
+
+    // Intro: on the first visit of the session, a virtual cursor glides once across "sense", "move",
+    // and "change shape" so visitors discover that the words react. Stops if the real cursor arrives.
+    (function intro() {
+      var played = false;
+      try { played = sessionStorage.getItem("fx-intro") === "1"; } catch (e) {}
+      if (played || reduceMotion.matches || window.scrollY > window.innerHeight * 0.5) return;
+      try { sessionStorage.setItem("fx-intro", "1"); } catch (e) {}
+      var words = ["sense", "move", "shape"].map(function (k) { return document.querySelector('[data-fx="' + k + '"]'); }).filter(Boolean);
+      var SWEEP = 950, GAP = 280, START = 1500;
+      var ease = function (t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; };
+      setTimeout(function () {
+        if (userTookOver) return;
+        introActive = true;
+        var t0 = performance.now(), total = words.length * (SWEEP + GAP);
+        (function step(now) {
+          var t = now - t0;
+          if (userTookOver || t >= total) { introActive = false; if (!userTookOver) { pointer = null; kick(); } return; }
+          var i = Math.floor(t / (SWEEP + GAP)), local = t - i * (SWEEP + GAP);
+          if (local > SWEEP) { pointer = null; }               // short pause between words
+          else {
+            var el = words[i], r = el.getBoundingClientRect(), p = ease(local / SWEEP);
+            var yOff = el.dataset.fx === "move" ? r.height * 0.45 : 0;   // from slightly below, so "move" letters hop up
+            pointer = { x: r.left - 24 + (r.width + 48) * p, y: r.top + r.height / 2 + yOff };
+          }
+          kick();
+          requestAnimationFrame(step);
+        })(t0);
+      }, START);
+    })();
     document.addEventListener("pointerleave", function () { pointer = null; kick(); });
     window.addEventListener("blur", function () { pointer = null; kick(); });
   }
@@ -254,6 +285,54 @@
     card.addEventListener("auxclick", function (e) { if (e.button === 1) open(e, true); });
   });
 
+  /* ---------- hero montage: project loops crossfade behind the hero ---------- */
+  (function () {
+    var bg = document.querySelector(".hero__bg");
+    if (!bg) return;
+    var vids = Array.prototype.slice.call(bg.querySelectorAll("video"));
+    var link = document.querySelector(".hero__now-link");
+    var toggle = document.querySelector(".hero__now-toggle");
+    var HOLD = 6500, idx = 0, timer = null, inView = true, userPaused = false;
+
+    function caption(v) {
+      if (!link) return;
+      link.classList.add("is-swapping");
+      setTimeout(function () {
+        link.querySelector(".hero__now-title").innerHTML = v.dataset.title;
+        link.querySelector(".hero__now-venue").innerHTML = v.dataset.venue;
+        link.setAttribute("href", v.dataset.href);
+        link.classList.remove("is-swapping");
+      }, 400);
+    }
+    function running() { return inView && !userPaused && !document.hidden && !reduceMotion.matches; }
+    function show(i) {
+      var prev = vids[idx], next = vids[i];
+      idx = i;
+      if (next !== prev) {
+        try { next.currentTime = 0; } catch (e) {}
+        if (running()) safePlay(next);
+        next.classList.add("is-active"); prev.classList.remove("is-active");
+        setTimeout(function () { if (prev !== vids[idx]) prev.pause(); }, 1900);
+        caption(next);
+      }
+    }
+    function schedule() { clearTimeout(timer); if (running()) timer = setTimeout(function () { show((idx + 1) % vids.length); schedule(); }, HOLD); }
+    function sync() {
+      if (running()) { safePlay(vids[idx]); schedule(); }
+      else { clearTimeout(timer); vids.forEach(function (v) { v.pause(); }); }
+    }
+    if (toggle) toggle.addEventListener("click", function () {
+      userPaused = !userPaused;
+      toggle.textContent = userPaused ? "Play" : "Pause";
+      toggle.setAttribute("aria-label", (userPaused ? "Play" : "Pause") + " background video");
+      sync();
+    });
+    new IntersectionObserver(function (es) { inView = es[0].isIntersecting; sync(); }, { threshold: 0.15 }).observe(bg);
+    document.addEventListener("visibilitychange", sync);
+    if (reduceMotion.addEventListener) reduceMotion.addEventListener("change", sync);
+    sync();
+  })();
+
   /* ---------- reveal on scroll ---------- */
   var revealIO = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
@@ -310,6 +389,25 @@
       var visible = r.top < vh * 0.65 && r.bottom > vh * 0.35 && !covered;
       if (visible && !p._userPaused) { if (video.paused) safePlay(video); }
       else if (!video.paused) video.pause();
+    });
+    exitCards(vh);
+  }
+
+  // Exit motion: as the next card (or the Publications section) slides up over a pinned card,
+  // that card's text block shrinks a little, drifts up and fades. Desktop only (cards are sticky there).
+  var stackedMQ = window.matchMedia("(min-width: 901px)");
+  var afterResearch = document.querySelector("#publications");
+  function exitCards(vh) {
+    var on = stackedMQ.matches && !reduceMotion.matches;
+    projects.forEach(function (p, i) {
+      var cover = projects[i + 1] || afterResearch;
+      var out = 0;
+      if (on && cover) {
+        var top = cover.getBoundingClientRect().top;
+        out = Math.min(1, Math.max(0, (vh - top) / vh));   // 0 = nothing covering, 1 = fully covered
+      }
+      var prev = p._out || 0;
+      if (Math.abs(out - prev) > 0.001 || (out === 0 && prev !== 0)) { p.style.setProperty("--out", out.toFixed(3)); p._out = out; }
     });
   }
   function requestSync() { if (!ticking) { ticking = true; requestAnimationFrame(syncVideos); } }
