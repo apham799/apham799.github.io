@@ -5,7 +5,7 @@ Chicago, working with Ken Nakagaki in the [Actuated Experience Lab (AxLab)](http
 My work builds physical interfaces that sense, move, and change shape: actuated and tangible systems that let people
 benefit from computation and robotics while keeping a sense of agency.
 
-**Live site:** https://apham799.github.io/AlanPham_Portfolio/
+**Live site:** https://apham799.github.io/
 
 ## Projects
 
