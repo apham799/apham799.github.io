@@ -16,7 +16,7 @@
       toggle.setAttribute("aria-label", "Switch to " + next + " theme");
       toggle.setAttribute("title", "Switch to " + next + " theme");
     }
-    if (themeMeta) themeMeta.setAttribute("content", theme === "dark" ? "#0f0f0e" : "#f4f2ec");
+    if (themeMeta) themeMeta.setAttribute("content", theme === "dark" ? "#0e0f11" : "#f3f5f8");
   }
   applyTheme(root.getAttribute("data-theme") || "dark");
 
@@ -182,12 +182,50 @@
   var LIFT_MS = 720;
   function pageNavigate(href) {
     if (reduceMotion.matches) { window.location.href = href; return; }
-    try { sessionStorage.setItem("pt", String(Date.now())); } catch (e) {}
+    var url = new URL(href, window.location.href), hash = url.hash;
+    try {
+      sessionStorage.setItem("pt", String(Date.now()));
+      // Carry the #section separately and load the page without it, so the browser doesn't do its own
+      // (smooth, late) jump; the arriving page positions itself before it becomes visible.
+      if (hash) { sessionStorage.setItem("pt-hash", hash); url.hash = ""; }
+    } catch (e) {}
     root.classList.remove("pt-enter");
     root.classList.add("pt-leave");
-    setTimeout(function () { window.location.href = href; }, LIFT_MS - 40);
+    setTimeout(function () { window.location.href = url.href; }, LIFT_MS - 40);
   }
-  if (root.classList.contains("pt-enter")) setTimeout(function () { root.classList.remove("pt-enter"); }, 1300);
+
+  // Where an element sits in normal flow. offsetTop ignores transforms (the rise-in on <main>);
+  // walking offsetParents with sticky disabled gives the un-stuck position of the project cards.
+  function naturalTop(el) {
+    var prev = el.style.position; el.style.position = "relative";
+    var top = 0, n = el;
+    while (n) { top += n.offsetTop; n = n.offsetParent; }
+    el.style.position = prev;
+    return Math.max(0, Math.round(top));
+  }
+
+  if (root.classList.contains("pt-enter")) {
+    var ptHash = null;
+    try { ptHash = sessionStorage.getItem("pt-hash"); sessionStorage.removeItem("pt-hash"); } catch (e) {}
+    var ptTarget = null;
+    if (ptHash) { try { ptTarget = document.querySelector(decodeURIComponent(ptHash)); } catch (e) {} }
+    if (ptTarget) {
+      var align = function () { window.scrollTo({ top: naturalTop(ptTarget), behavior: "instant" }); };
+      align();
+      // Fonts/images finishing can shift layout above the target; keep it pinned while the page is still fading in
+      var stopAt = performance.now() + 1100;
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (performance.now() < stopAt) align(); });
+      window.addEventListener("load", function () { if (performance.now() < stopAt) align(); }, { once: true });
+      if (window.ResizeObserver) {
+        var ro = new ResizeObserver(function () { if (performance.now() < stopAt) align(); else ro.disconnect(); });
+        ro.observe(document.body);
+        setTimeout(function () { ro.disconnect(); }, 1200);
+      }
+      try { history.replaceState(history.state, "", location.pathname + location.search + ptHash); } catch (e) {}
+    }
+    setTimeout(function () { root.classList.remove("pt-enter"); }, 1300);
+  }
+
   // Returning via back/forward cache: never leave the page in its "floated away" state
   window.addEventListener("pageshow", function (e) { if (e.persisted) root.classList.remove("pt-leave", "pt-enter"); });
 
@@ -317,7 +355,14 @@
   document.querySelectorAll(".yt[data-yt]").forEach(function (box) {
     var btn = box.querySelector(".yt__play");
     btn.addEventListener("click", function () {
+      // YouTube's embedded player refuses to run on pages opened from disk (file://, "Error 153"),
+      // so in that case open the video on YouTube instead.
+      if (location.protocol === "file:") {
+        window.open("https://www.youtube.com/watch?v=" + box.getAttribute("data-yt"), "_blank", "noopener");
+        return;
+      }
       var iframe = document.createElement("iframe");
+      iframe.referrerPolicy = "strict-origin-when-cross-origin";   // YouTube requires a referrer
       iframe.src = "https://www.youtube-nocookie.com/embed/" + box.getAttribute("data-yt") + "?autoplay=1&rel=0";
       iframe.title = btn.getAttribute("aria-label") || "Video";
       iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";

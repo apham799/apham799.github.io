@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Alan Pham — Physical Interaction Research</title>
   <meta name="description" content="Alan Pham is an HCI researcher at the University of Chicago building interfaces that sense, move, and change shape." />
-  <meta name="theme-color" content="#0f0f0e" />
+  <meta name="theme-color" content="#0e0f11" />
   <!-- TODO(Alan): once the domain is final, add og:image with an ABSOLUTE url, e.g. https://<domain>/assets/media/buoyance.jpg -->
   <meta property="og:title" content="Alan Pham — Physical Interaction Research" />
   <meta property="og:description" content="Interfaces that sense, move, and change shape." />
@@ -55,13 +55,8 @@
         <span class="hero__line">Alan</span>
         <span class="hero__line hero__line--indent">Pham</span>
       </h1>
-
-      <!--
-        TODO(Alan): REVISE THIS ONE-LINE STATEMENT.
-        Keep the <em data-fx="..."> wrappers around any words you want animated on hover
-        (fx options: "sense", "move", "shape"), or remove them for plain text.
-      -->
-      <p class="hero__statement reveal" data-todo="Revise one-line research statement">
+      <!-- Words wrapped in <em data-fx="sense|move|shape"> react to the cursor. -->
+      <p class="hero__statement reveal">
         I build interfaces that <em data-fx="sense">sense</em>, <em data-fx="move">move</em>,
         and <em data-fx="shape">change&nbsp;shape</em>&nbsp;&mdash; bridging computational capabilities and physical interfaces.
       </p>
@@ -83,7 +78,13 @@
     </section>
 
     <!-- ============ RESEARCH (full-screen project sections) ============ -->
-    <section id="research" class="research" aria-label="Selected research">
+    <section id="research" class="research" aria-labelledby="research-title">
+      <div class="research__intro">
+        <header class="section__head reveal">
+          <h2 class="section__title" id="research-title">Research</h2>
+          <p class="section__note mono">Selected projects &middot; 2025&ndash;2026</p>
+        </header>
+      </div>
 
       <!-- ---- 01 Buoyancé ---- -->
       <article class="project" id="buoyance" data-motion="float" data-card-href="projects/buoyance/index.html">
@@ -114,10 +115,6 @@
             </ul>
           </div>
 
-          <!-- TODO(Alan): review theme pills -->
-          <ul class="pills" aria-label="Themes" data-todo="Review theme pills">
-            <li>Actuation</li><li>Mechanism Design</li><li>Spatial Interfaces</li><li>Fabrication</li><li>Installation</li>
-          </ul>
         </div>
       </article>
 
@@ -150,9 +147,6 @@
             </ul>
           </div>
 
-          <ul class="pills" aria-label="Themes" data-todo="Review theme pills">
-            <li>Materials</li><li>Sensing</li><li>Actuation</li><li>Malleable Interfaces</li>
-          </ul>
         </div>
       </article>
 
@@ -187,9 +181,6 @@
             </ul>
           </div>
 
-          <ul class="pills" aria-label="Themes" data-todo="Review theme pills">
-            <li>Data Physicalization</li><li>Haptics</li><li>Swarm UIs</li>
-          </ul>
         </div>
       </article>
     </section>
@@ -250,7 +241,7 @@
         <li class="reveal news__item--link">
           <a class="news__row" href="projects/buoyance-tuggle/index.html">
             <span class="news__date mono">Sep 2025</span>
-            <p>Exhibited <span class="news__title"><em>Buoyancé &ndash; Tug(gle)</em></span> at Ars Electronica Festival, Linz, Austria.</p>
+            <p>Exhibited <span class="news__title"><em>Buoyancé&nbsp;&ndash; Tug(gle)</em></span> at Ars Electronica Festival, Linz, Austria.</p>
             <span class="news__arrow" aria-hidden="true">&rarr;</span>
           </a>
         </li>
@@ -290,15 +281,13 @@
 
       <div class="about__grid">
         <div class="about__text reveal">
-          <!-- TODO(Alan): revise bio. -->
-          <p class="about__lead" data-todo="Revise bio">
+          <p class="about__lead">
             I&rsquo;m a pre-doctoral M.S. student in Computer Science at the University of Chicago, working with Professor
             Ken Nakagaki in the Actuated Experience Lab. I build interactive interfaces that connect technological advancements
             with physically manipulable interfaces, enabling users to take advantage of computational capabilities while retaining
             their sense of self.
           </p>
-          <!-- TODO(Alan): revise "directions" paragraph; this is where you signal breadth beyond swarm UIs. -->
-          <p data-todo="Revise research directions">
+          <p>
             So far my work has explored actuated and shape-changing interfaces, from room-scale balloons to
             millimeter-scale magnetic particles. Going forward, I&rsquo;m excited about integrating AI into the loop
             to allow people to benefit from the physical augmentation and assistance of physically actuated interfaces

@@ -89,22 +89,22 @@
 }
 
 [data-theme="dark"] {
-  --bg: #0f0f0e;
-  --bg-2: #181816;
-  --fg: #ecebe5;
-  --fg-2: #a3a29b;
-  --line: rgba(236, 235, 229, 0.14);
+  --bg: #0e0f11;
+  --bg-2: #16181b;
+  --fg: #e9ebef;
+  --fg-2: #9ea3ab;
+  --line: rgba(233, 235, 239, 0.14);
   --accent: #2f6ae3;
   --accent-ink: #7ea8ff;
   color-scheme: dark;
 }
 
 [data-theme="light"] {
-  --bg: #f4f2ec;
-  --bg-2: #eae7df;
-  --fg: #151514;
-  --fg-2: #5b5953;
-  --line: rgba(21, 21, 20, 0.14);
+  --bg: #f3f5f8;
+  --bg-2: #e7eaef;
+  --fg: #121417;
+  --fg-2: #565b63;
+  --line: rgba(18, 20, 23, 0.14);
   --accent: #1f5fd6;
   --accent-ink: #1a4cae;
   color-scheme: light;
@@ -116,6 +116,9 @@
 *::after { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+/* Arriving from another page via the transition: land on the #section instantly (no visible scroll), then smooth again */
+html.pt-enter { scroll-behavior: auto; }
+section[id], article[id] { scroll-margin-top: 0; }
 body {
   margin: 0;
   background: var(--bg);
@@ -251,6 +254,13 @@ strong { font-weight: 600; }
 
 /* ---------- research: full-screen project sections ---------- */
 .research { position: relative; }
+/* section heading above the full-screen project cards, matching the other sections */
+.research__intro {
+  position: relative; z-index: 1; background: var(--bg);
+  max-width: var(--maxw); margin: 0 auto;
+  padding: clamp(4rem, 10vh, 7rem) var(--pad) clamp(2rem, 5vh, 3rem);
+}
+.research__intro .section__head { margin-bottom: 0; }
 
 .project {
   position: sticky; top: 0;
@@ -327,13 +337,6 @@ strong { font-weight: 600; }
 .project__title-link:hover { color: inherit; }
 .project__links-note { display: inline-block; padding: 0.5rem 0; color: var(--fg-2); }
 
-.pills { display: flex; flex-wrap: wrap; gap: 0.45rem; }
-.pills li {
-  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase;
-  padding: 0.3rem 0.7rem; border-radius: 999px;
-  border: 1px solid var(--line); color: var(--fg-2);
-  background: color-mix(in srgb, var(--bg) 55%, transparent);
-}
 
 /* Buoyancé: footage is ~2:1 and the applications span the whole room, so use a wider, shorter
    frame anchored to the bottom (shows ~80% of the frame instead of ~55%) */
@@ -379,20 +382,17 @@ strong { font-weight: 600; }
 
 /* reveal of the rest of the body */
 .js .project__main > *:not(.project__title),
-.js .project .pills,
 .js .project__top {
   opacity: 0; transform: translateY(14px);
   transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
 }
 .js .project.is-in .project__main > *:not(.project__title),
-.js .project.is-in .pills,
 .js .project.is-in .project__top { opacity: 1; transform: none; }
 .js .project.is-in .project__sub   { transition-delay: 0.35s; }
 .js .project.is-in .netline        { transition-delay: 0.3s; }
 .js .project.is-in .project__desc  { transition-delay: 0.45s; }
 .js .project.is-in .project__role  { transition-delay: 0.55s; }
 .js .project.is-in .project__links { transition-delay: 0.65s; }
-.js .project.is-in .pills          { transition-delay: 0.8s; }
 
 /* float (Buoyancé): letters rise, then bob gently */
 .js [data-motion="float"] .project__title .ch {
@@ -575,7 +575,12 @@ strong { font-weight: 600; }
 .pp-back { color: var(--fg-2); text-decoration: none; margin-bottom: 1.5rem; width: fit-content; }
 .pp-back:hover { color: var(--fg); }
 .pp-hero__venue { color: var(--accent-ink); }
-.pp-hero__title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(4rem, 11vw, 10rem); line-height: 0.9; letter-spacing: -0.02em; }
+.pp-hero__title {
+  font-family: var(--font-serif); font-weight: 400;
+  /* Playfair has tall ascenders/descenders: give lines room so "y", "g", "( )" never touch the subtitle */
+  font-size: clamp(3rem, 8vw, 7.5rem); line-height: 1.08; letter-spacing: -0.015em;
+  margin-bottom: 0.12em; text-wrap: balance;
+}
 .pp-hero__sub { font-size: clamp(1.15rem, 1.8vw, 1.5rem); line-height: 1.35; max-width: 40ch; }
 .pp-hero .media-toggle { top: calc(var(--header-h) + 1rem); }
 
@@ -753,7 +758,8 @@ html.pt-enter main, html.pt-enter .site-footer {
 }
 @keyframes pt-rise {
   0%   { transform: translateY(10vh);   opacity: 0; }
-  45%  { opacity: 1; }
+  12%  { opacity: 0; }                                   /* stay hidden while the page settles on its #section */
+  50%  { opacity: 1; }
   68%  { transform: translateY(-0.9vh); }                /* buoyant overshoot */
   84%  { transform: translateY(0.3vh); }
   100% { transform: translateY(0);      opacity: 1; }
