@@ -22,8 +22,7 @@ A hand-built static site: plain HTML, CSS, and JavaScript, with no framework, no
 requests on load.
 
 - **Full-screen project sections** with looping video; videos play only while on screen.
-- **Motion drawn from the projects themselves:** pages rise in and settle like a released balloon (Buoyancé), and
-  each project title has its own small animated motif: tethered balloons, a settling particle cluster, a node graph.
+- **Motion drawn from the projects themselves:** pages rise in and settle like a released balloon (Buoyancé).
 - **Light and dark themes** that follow the visitor's choice and are remembered between visits.
 - **Accessible by default:** everything respects *reduced motion*, videos can be paused, text meets WCAG contrast
   guidelines, and images have descriptive alt text.

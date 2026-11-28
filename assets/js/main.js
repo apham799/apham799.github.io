@@ -396,11 +396,10 @@
   // Exit motion: as the next card (or the Publications section) slides up over a pinned card,
   // that card's text block shrinks a little, drifts up and fades. Desktop only (cards are sticky there).
   var stackedMQ = window.matchMedia("(min-width: 901px)");
-  var afterResearch = document.querySelector("#publications");
   function exitCards(vh) {
     var on = stackedMQ.matches && !reduceMotion.matches;
     projects.forEach(function (p, i) {
-      var cover = projects[i + 1] || afterResearch;
+      var cover = projects[i + 1];   // the last card has nothing sliding over it, so its text stays put
       var out = 0;
       if (on && cover) {
         var top = cover.getBoundingClientRect().top;
